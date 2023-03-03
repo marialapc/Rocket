@@ -1,5 +1,9 @@
 const canvas = document.querySelector("#game");
 const game = canvas.getContext("2d");
+const btnUp = document.querySelector('#up');
+const btnLeft = document.querySelector('#left');
+const btnRight = document.querySelector('#right');
+const btnDown = document.querySelector('#down');
 
 let canvasSize;
 let elementSize;
@@ -34,7 +38,6 @@ function startGame() {
   const map = maps[1];
   const mapRows = map.trim().split("\n");
   const mapRowCols = mapRows.map((row) => row.trim().split(""));
-  console.log({ map, mapRows, mapRowCols });
 
   //  print the element (step 6)
   //    for (let row = 1; row <= 10; row++){
@@ -45,14 +48,44 @@ function startGame() {
   //   }
 
   //print the elements refactor (step 7)
-
   mapRowCols.forEach((row, rowI) => {
     row.forEach((col, colI) => {
       const emoji = emojis[col];
       const posX = elementSize * (colI + 1);
       const posY = elementSize * (rowI + 1);
       game.fillText(emoji, posX, posY);
-      console.log({ row, rowI, col, colI });
     });
   });
+}
+
+ // move the rocket (step 8)
+
+window.addEventListener('keydown', moveByKeys);
+btnUp.addEventListener ('click', moveUp);
+btnLeft.addEventListener ('click', moveLeft);
+btnRight.addEventListener ('click', moveRight);
+btnDown.addEventListener ('click', moveDown);
+
+
+function moveByKeys(event) {
+ if ( event.key === 'ArrowUp') moveUp();
+ else if (event.key == 'ArrowLeft') moveLeft();
+ else if (event.key == 'ArrowRight') moveRight();
+ else if (event.key == 'ArrowDown') moveDown();
+ }
+
+function moveUp() {
+console.log('up');
+}
+
+function moveLeft() {
+
+}
+
+function moveRight() {
+
+}
+
+function moveDown() {
+
 }
