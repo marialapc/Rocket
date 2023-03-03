@@ -1,1 +1,1 @@
-#🚀 Rocket
+🚀 Rocket
