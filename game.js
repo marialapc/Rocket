@@ -7,8 +7,9 @@ let elementSize;
 window.addEventListener('load', setCanvasSize);
 window.addEventListener('resize', setCanvasSize);
 
-//resize canvas
+
 function setCanvasSize() {
+//resize canvas
 
     if (window.innerHeight > window.innerWidth){
        canvasSize = window.innerWidth * 0.8;
@@ -25,12 +26,21 @@ function setCanvasSize() {
 }
 
 function startGame(){
-
 // import elements
+
     game.font = elementSize + 'px Verdana';
     game.textAlign = 'end';
 
-  for (let i = 1; i <= 10; i++){
-    game.fillText(emojis['X'], elementSize, elementSize * i);
+// split the elements in rows whitout spaces in 10 positions (step 6)
+    const map = maps[1];
+    const mapRows = map.trim().split('\n');
+    const mapRowCols = mapRows.map(row => row.trim().split(''));
+
+//print the elements (step 6)
+  for (let row = 1; row <= 10; row++){
+    for (let col = 1; col <= 10; col++){
+    game.fillText(emojis[mapRowCols[row-1][col-1]], 
+    elementSize * col, elementSize * row);
     }
+}
 }
