@@ -1,46 +1,58 @@
-const canvas = document.querySelector('#game');
-const game = canvas.getContext('2d');
+const canvas = document.querySelector("#game");
+const game = canvas.getContext("2d");
 
 let canvasSize;
 let elementSize;
 
-window.addEventListener('load', setCanvasSize);
-window.addEventListener('resize', setCanvasSize);
-
+window.addEventListener("load", setCanvasSize);
+window.addEventListener("resize", setCanvasSize);
 
 function setCanvasSize() {
-//resize canvas
+  //resize canvas
 
-    if (window.innerHeight > window.innerWidth){
-       canvasSize = window.innerWidth * 0.8;
-    } else{
-        canvasSize = window.innerHeight * 0.8;
-    }
+  if (window.innerHeight > window.innerWidth) {
+    canvasSize = window.innerWidth * 0.8;
+  } else {
+    canvasSize = window.innerHeight * 0.8;
+  }
 
-    canvas.setAttribute('width', canvasSize);
-    canvas.setAttribute('height', canvasSize);
+  canvas.setAttribute("width", canvasSize);
+  canvas.setAttribute("height", canvasSize);
 
-    elementSize = canvasSize / 10;
+  elementSize = canvasSize / 10;
 
-    startGame();  
+  startGame();
 }
 
-function startGame(){
-// import elements
+function startGame() {
+  // import elements
 
-    game.font = elementSize + 'px Verdana';
-    game.textAlign = 'end';
+  game.font = elementSize + "px Verdana";
+  game.textAlign = "end";
 
-// split the elements in rows whitout spaces in 10 positions (step 6)
-    const map = maps[1];
-    const mapRows = map.trim().split('\n');
-    const mapRowCols = mapRows.map(row => row.trim().split(''));
+  // split the elements in rows whitout spaces in 10 positions (step 6)
+  const map = maps[1];
+  const mapRows = map.trim().split("\n");
+  const mapRowCols = mapRows.map((row) => row.trim().split(""));
+  console.log({ map, mapRows, mapRowCols });
 
-//print the elements (step 6)
-  for (let row = 1; row <= 10; row++){
-    for (let col = 1; col <= 10; col++){
-    game.fillText(emojis[mapRowCols[row-1][col-1]], 
-    elementSize * col, elementSize * row);
-    }
-}
+  //  print the element (step 6)
+  //    for (let row = 1; row <= 10; row++){
+  //      for (let col = 1; col <= 10; col++){
+  //       game.fillText(emojis[mapRowCols[row-1][col-1]],
+  //       elementSize * col, elementSize * row);
+  //     }
+  //   }
+
+  //print the elements refactor (step 7)
+
+  mapRowCols.forEach((row, rowI) => {
+    row.forEach((col, colI) => {
+      const emoji = emojis[col];
+      const posX = elementSize * (colI + 1);
+      const posY = elementSize * (rowI + 1);
+      game.fillText(emoji, posX, posY);
+      console.log({ row, rowI, col, colI });
+    });
+  });
 }
