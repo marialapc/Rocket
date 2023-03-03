@@ -1,13 +1,16 @@
 const canvas = document.querySelector('#game');
 const game = canvas.getContext('2d');
 
-window.addEventListener('load', startGame)
+let canvasSize;
+let elementSize;
 
-function startGame(){
-    // make canvas responsive
-    let canvasSize;
+window.addEventListener('load', setCanvasSize);
+window.addEventListener('resize', setCanvasSize);
 
-    if(window.innerHeight > window.innerWidth){
+//resize canvas
+function setCanvasSize() {
+
+    if (window.innerHeight > window.innerWidth){
        canvasSize = window.innerWidth * 0.8;
     } else{
         canvasSize = window.innerHeight * 0.8;
@@ -16,9 +19,14 @@ function startGame(){
     canvas.setAttribute('width', canvasSize);
     canvas.setAttribute('height', canvasSize);
 
-// import elements
-    const elementSize = canvasSize / 10;
+    elementSize = canvasSize / 10;
 
+    startGame();  
+}
+
+function startGame(){
+
+// import elements
     game.font = elementSize + 'px Verdana';
     game.textAlign = 'end';
 
