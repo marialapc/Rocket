@@ -9,7 +9,9 @@ let canvasSize;
 let elementSize;
 
 // step(9)
-const playerPosition ={
+const playerPosition = {
+  x: undefined,
+  y: undefined,
   
 }
 
@@ -40,7 +42,7 @@ function startGame() {
   game.textAlign = "end";
 
   // split the elements in rows whitout spaces in 10 positions (step 6)
-  const map = maps[1];
+  const map = maps[0];
   const mapRows = map.trim().split("\n");
   const mapRowCols = mapRows.map((row) => row.trim().split(""));
 
@@ -58,9 +60,23 @@ function startGame() {
       const emoji = emojis[col];
       const posX = elementSize * (colI + 1);
       const posY = elementSize * (rowI + 1);
+
+      if(col === 'O'){
+        playerPosition.x = posX;
+        playerPosition.y = posY;  
+      }
+
       game.fillText(emoji, posX, posY);
     });
   });
+
+  movePlayer();
+}
+
+//print the rocket (step 9)
+
+function movePlayer(){
+  game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y);
 }
 
  // listen the keyboard(step 8)
@@ -80,8 +96,10 @@ function moveByKeys(event) {
  }
 
 // move the rocket 
-function moveUp() {
 
+function moveUp() {
+  playerPosition.y -= elementSize;
+  movePlayer();
 }
 
 function moveLeft() {
