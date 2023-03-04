@@ -8,6 +8,11 @@ const btnDown = document.querySelector('#down');
 let canvasSize;
 let elementSize;
 
+// step(9)
+const playerPosition ={
+  
+}
+
 window.addEventListener("load", setCanvasSize);
 window.addEventListener("resize", setCanvasSize);
 
@@ -58,7 +63,7 @@ function startGame() {
   });
 }
 
- // move the rocket (step 8)
+ // listen the keyboard(step 8)
 
 window.addEventListener('keydown', moveByKeys);
 btnUp.addEventListener ('click', moveUp);
@@ -74,8 +79,9 @@ function moveByKeys(event) {
  else if (event.key == 'ArrowDown') moveDown();
  }
 
+// move the rocket 
 function moveUp() {
-console.log('up');
+
 }
 
 function moveLeft() {
