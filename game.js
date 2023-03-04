@@ -42,7 +42,7 @@ function startGame() {
   game.textAlign = "end";
 
   // split the elements in rows whitout spaces in 10 positions (step 6)
-  const map = maps[0];
+  const map = maps[1];
   const mapRows = map.trim().split("\n");
   const mapRowCols = mapRows.map((row) => row.trim().split(""));
 
@@ -107,13 +107,16 @@ function moveUp() {
 }
 
 function moveLeft() {
-
+  playerPosition.x -= elementSize;
+  startGame();
 }
 
 function moveRight() {
-
+  playerPosition.x += elementSize;
+  startGame();
 }
 
 function moveDown() {
-
+  playerPosition.y += elementSize;
+  startGame();
 }
