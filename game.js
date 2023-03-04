@@ -54,6 +54,8 @@ function startGame() {
   //     }
   //   }
 
+  //delete the rocket old position (step 10)
+  game.clearRect(0,0, canvasSize,canvasSize);
   //print the elements refactor (step 7)
   mapRowCols.forEach((row, rowI) => {
     row.forEach((col, colI) => {
@@ -61,10 +63,12 @@ function startGame() {
       const posX = elementSize * (colI + 1);
       const posY = elementSize * (rowI + 1);
 
-      if(col === 'O'){
-        playerPosition.x = posX;
-        playerPosition.y = posY;  
+      if (col === 'O'){
+      if (!playerPosition.x && !playerPosition.y)  {
+      playerPosition.x= posX;
+      playerPosition.y = posY
       }
+    }
 
       game.fillText(emoji, posX, posY);
     });
@@ -99,7 +103,7 @@ function moveByKeys(event) {
 
 function moveUp() {
   playerPosition.y -= elementSize;
-  movePlayer();
+  startGame();
 }
 
 function moveLeft() {
