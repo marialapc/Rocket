@@ -99,24 +99,40 @@ function moveByKeys(event) {
  else if (event.key == 'ArrowDown') moveDown();
  }
 
-// move the rocket 
+// move the rocket  and respect the canvas (step 11)
 
 function moveUp() {
+  if ((playerPosition.y - elementSize) < elementSize){
+    console.log('out');
+  }else {
   playerPosition.y -= elementSize;
   startGame();
+  }
 }
 
 function moveLeft() {
-  playerPosition.x -= elementSize;
+ if( (playerPosition.x - elementSize) < elementSize){
+  console.log('out');
+ }else{
+ playerPosition. x -= elementSize;
   startGame();
 }
+};
 
 function moveRight() {
+  if ((playerPosition.x + elementSize) > canvasSize){
+    console.log('out');
+    }else{
   playerPosition.x += elementSize;
-  startGame();
+    startGame();
+    }
 }
 
 function moveDown() {
+  if ((playerPosition.y+ elementSize) > canvasSize){
+    console.log('out');
+    }else{
   playerPosition.y += elementSize;
-  startGame();
+    startGame();
+    }
 }
