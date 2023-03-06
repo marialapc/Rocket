@@ -21,6 +21,12 @@ const astronautPosition = {
   y: undefined,
 };
 
+//(step13)
+let rockPosition = []
+
+
+
+
 window.addEventListener("load", setCanvasSize);
 window.addEventListener("resize", setCanvasSize);
 
@@ -60,6 +66,7 @@ function startGame() {
   //     }
   //   }
 
+  rockPosition = [];
   //delete the rocket old position (step 10)
   game.clearRect(0,0, canvasSize,canvasSize);
   //print the elements refactor (step 7)
@@ -77,6 +84,11 @@ function startGame() {
     } else if (col === 'I'){
       astronautPosition.x = posX;
       astronautPosition.y = posY;
+    } else if (col == 'X'){
+      rockPosition.push({
+        x: posX,
+        y: posY,
+      });
     }
 
       game.fillText(emoji, posX, posY);
@@ -89,13 +101,25 @@ function startGame() {
 //print the rocket (step 9) and catch de astronaut (step 12)
 
 function movePlayer(){
-  const catchTheAstronautX = playerPosition.x === astronautPosition.x;
-  const catchTheAstronautY = playerPosition.y === astronautPosition.y;
+  const catchTheAstronautX = playerPosition.x.toFixed(3) === astronautPosition.x;
+  const catchTheAstronautY = playerPosition.y.toFixed(3) === astronautPosition.y;
   const catchTheAstronaut = catchTheAstronautX && catchTheAstronautY;
   
  if (catchTheAstronaut){
 console.log('subiste de nivel');
   }
+ 
+ // (step 13)
+  const rockCollision = rockPosition.find(rock =>{
+    const rockCollisionX =  rock.x === playerPosition.x;
+    const rockCollisionY =  rock.y === playerPosition.y;
+    return rockCollisionX && rockCollisionY;
+  });
+
+  if (rockCollision){
+    console.log('collision');
+      }
+     
 
   game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y);
 }
