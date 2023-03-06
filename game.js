@@ -8,12 +8,18 @@ const btnDown = document.querySelector('#down');
 let canvasSize;
 let elementSize;
 
-// step(9)
+// (step9)
 const playerPosition = {
   x: undefined,
   y: undefined,
   
-}
+};
+
+//(step 12)
+const astronautPosition = {
+  x: undefined,
+  y: undefined,
+};
 
 window.addEventListener("load", setCanvasSize);
 window.addEventListener("resize", setCanvasSize);
@@ -42,7 +48,7 @@ function startGame() {
   game.textAlign = "end";
 
   // split the elements in rows whitout spaces in 10 positions (step 6)
-  const map = maps[1];
+  const map = maps[0];
   const mapRows = map.trim().split("\n");
   const mapRowCols = mapRows.map((row) => row.trim().split(""));
 
@@ -65,21 +71,32 @@ function startGame() {
 
       if (col === 'O'){
       if (!playerPosition.x && !playerPosition.y)  {
-      playerPosition.x= posX;
-      playerPosition.y = posY
+      playerPosition.x = posX;
+      playerPosition.y = posY;
       }
+    } else if (col === 'I'){
+      astronautPosition.x = posX;
+      astronautPosition.y = posY;
     }
 
       game.fillText(emoji, posX, posY);
     });
   });
 
-  movePlayer();
+  movePlayer()
 }
 
-//print the rocket (step 9)
+//print the rocket (step 9) and catch de astronaut (step 12)
 
 function movePlayer(){
+  const catchTheAstronautX = playerPosition.x === astronautPosition.x;
+  const catchTheAstronautY = playerPosition.y === astronautPosition.y;
+  const catchTheAstronaut = catchTheAstronautX && catchTheAstronautY;
+  
+ if (catchTheAstronaut){
+console.log('subiste de nivel');
+  }
+
   game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y);
 }
 
