@@ -7,6 +7,7 @@ const btnDown = document.querySelector('#down');
 
 let canvasSize;
 let elementSize;
+let level = 0;
 
 // (step9)
 const playerPosition = {
@@ -22,10 +23,7 @@ const astronautPosition = {
 };
 
 //(step13)
-let rockPosition = []
-
-
-
+let rockPosition = [];
 
 window.addEventListener("load", setCanvasSize);
 window.addEventListener("resize", setCanvasSize);
@@ -54,9 +52,14 @@ function startGame() {
   game.textAlign = "end";
 
   // split the elements in rows whitout spaces in 10 positions (step 6)
-  const map = maps[0];
-  const mapRows = map.trim().split("\n");
-  const mapRowCols = mapRows.map((row) => row.trim().split(""));
+  const map = maps[level];
+
+  if (!map){
+    gameWin();
+    return;
+  }
+  const mapRows = map.trim().split('\n');
+  const mapRowCols = mapRows.map(row => row.trim().split(''));
 
   //  print the element (step 6)
   //    for (let row = 1; row <= 10; row++){
@@ -101,18 +104,19 @@ function startGame() {
 //print the rocket (step 9) and catch de astronaut (step 12)
 
 function movePlayer(){
-  const catchTheAstronautX = playerPosition.x.toFixed(3) === astronautPosition.x;
-  const catchTheAstronautY = playerPosition.y.toFixed(3) === astronautPosition.y;
+  const catchTheAstronautX = playerPosition.x.toFixed(3) === astronautPosition.x.toFixed(3);
+  const catchTheAstronautY = playerPosition.y.toFixed(3) === astronautPosition.y.toFixed(3);
   const catchTheAstronaut = catchTheAstronautX && catchTheAstronautY;
   
  if (catchTheAstronaut){
-console.log('subiste de nivel');
+  console.log('catch');
+ levelWin();
   }
  
  // (step 13)
-  const rockCollision = rockPosition.find(rock =>{
-    const rockCollisionX =  rock.x === playerPosition.x;
-    const rockCollisionY =  rock.y === playerPosition.y;
+  const rockCollision = rockPosition.find(rock => {
+    const rockCollisionX =  rock.x.toFixed(3) === playerPosition.x.toFixed(3);
+    const rockCollisionY =  rock.y.toFixed(3) === playerPosition.y.toFixed(3);
     return rockCollisionX && rockCollisionY;
   });
 
@@ -124,6 +128,15 @@ console.log('subiste de nivel');
   game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y);
 }
 
+function levelWin(){
+  console.log('subiste de nivel');
+  level++;
+  startGame();
+}
+
+function gameWin(){
+  console.log('you win');
+}
  // listen the keyboard(step 8)
 
 window.addEventListener('keydown', moveByKeys);
