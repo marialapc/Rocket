@@ -145,13 +145,11 @@ function movePlayer(){
 
   game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y);
 }
-
 function levelWin(){
   console.log('subiste de nivel');
   level++;
   startGame();
 }
-
 function levelFail(){
   lives--;
 
@@ -194,7 +192,6 @@ function showLives(){
   heartsArray.forEach(heart => spanLives.append(heart));
  
 }
-
 function showTime(){
    spanTime.innerHTML = Date.now() - timeStart;
 }
