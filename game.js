@@ -5,11 +5,17 @@ const btnLeft = document.querySelector('#left');
 const btnRight = document.querySelector('#right');
 const btnDown = document.querySelector('#down');
 const spanLives = document.querySelector('#lives');
+const spanTime = document.querySelector('#time');
 
 let canvasSize;
 let elementSize;
 let level = 0;
 let lives = 3;
+
+let timeStart;
+let timePlayer;
+let timeInterval;
+
 
 // (step9)
 const playerPosition = {
@@ -60,6 +66,11 @@ function startGame() {
     gameWin();
     return;
   }
+  if (!timeStart){
+    timeStart = Date.now();
+    timeInterval = setInterval(showTime, 100);
+  }
+
   const mapRows = map.trim().split('\n');
   const mapRowCols = mapRows.map(row => row.trim().split(''));
   showLives();
@@ -143,6 +154,7 @@ function levelFail(){
   if (lives <= 0){
     level = 0; 
     lives = 3;
+    timeStart = undefined;
   }
   playerPosition.x = undefined;
   playerPosition.y = undefined;
@@ -151,6 +163,7 @@ function levelFail(){
 
 function gameWin(){
   console.log('you win');
+  clearInterval(timeInterval);
 }
 //(step 16)
 function showLives(){
@@ -160,6 +173,9 @@ function showLives(){
  
 }
 
+function showTime(){
+   spanTime.innerHTML = Date.now() - timeStart;
+}
  // listen the keyboard(step 8)
 
 window.addEventListener('keydown', moveByKeys);
