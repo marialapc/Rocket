@@ -14,13 +14,43 @@ body {
     height: 100vh;
     width: 100vw;
   }
+  .gameboy {
+    position: relative;
+    display: block;
+    margin: 20px auto;
+    width: 400px;
+    height: 600px;
+    background: #EEE;
+    border-radius: 10px 10px 60px 10px;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .gameboy:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 31px;
+    border-bottom: 4px solid #E0E0E0;
+  }
+  
+  .gameboy:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 334px;
+    height: 31px;
+    border-left: 4px solid #E0E0E0;
+    border-right: 4px solid #E0E0E0;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
   
   canvas {
     border: 4px solid #ff6600;
     border-radius: 8px;
     background-color: #000000;
   }
-  
+
   .btns {
     display: flex;
     justify-content: center;
