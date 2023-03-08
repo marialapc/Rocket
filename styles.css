@@ -1,5 +1,7 @@
+
+
 body {
-    background-color:black;
+  background-image: url('./icons/background3.jpg');
     background-size:contain;
     color: #fff;  
     font-family: Verdana, Geneva, Tahoma, sans-serif;
