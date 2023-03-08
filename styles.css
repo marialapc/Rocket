@@ -28,6 +28,7 @@ body {
     background: #EEE;
     border-radius: 10px 10px 60px 10px;
     box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+  
   }
   
   .gameboy:before {
@@ -51,11 +52,11 @@ body {
   }
   
   canvas {
-    border: 8px solid #00ffae;
+    border: 15px solid #02eea3;
     border-radius: 8px;
     background-image: url('./icons/background3.jpg');
     margin-right: 30px;
-    margin-top: 10px;
+    margin-top: 30px;
   }
 
   .btns {
@@ -111,14 +112,14 @@ body {
     flex-direction: center;
   }
   .btnA{
-    background-color: #43e7b3;
+    background-color: #02eea3;
     border-color:#00ffae;
     width: 25px;
     height: 25px;
     border-radius: 100%;
   }
   .btnB{
-    background-color: #43e7b3;
+    background-color: #02eea3;
     border-color:#00ffae;
     width: 25px;
     height: 25px;
@@ -138,7 +139,32 @@ body {
   box-shadow: 15px 0 #c2c1c1, 30px 0 #c2c1c1, 45px 0 #c2c1c1, 60px 0 #c2c1c1;
  }
   
+.fakeBtn{
+  content: "";
+  position: relative;
+  height: 30px;
+  width: 8px;
+  left: 30px;
+  top: 35px;
+  background: #434141;
+  border-radius: 4px;
+  transform: rotate(-110deg);
+  box-shadow: 15px 0 #c2c1c1, 30px 0 #c2c1c1, 
 
+}
+.fakeBtn2{
+  content: "";
+  position: relative;
+  height: 30px;
+  width: 8px;
+  left: 60px;
+  top: 35px;
+  background: #434141;
+  border-radius: 4px;
+  transform: rotate(-110deg);
+  box-shadow: 15px 0 #c2c1c1, 30px 0 #c2c1c1, 
+
+}
 
   .messages {
     display: flex;
