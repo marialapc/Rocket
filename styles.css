@@ -18,8 +18,8 @@ body {
     position: relative;
     display: block;
     margin: 20px auto;
-    width: 400px;
-    height: 600px;
+    width: calc(422px * 0.85);
+    height: calc(697px * 0.85);
     background: #EEE;
     border-radius: 10px 10px 60px 10px;
     box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
@@ -37,12 +37,12 @@ body {
     content: "";
     position: absolute;
     top: 0;
-    width: 334px;
-    height: 31px;
+    width: calc(334px * 0.85);
+    height: calc(31px * 0.85);
     border-left: 4px solid #E0E0E0;
     border-right: 4px solid #E0E0E0;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: calc(40px * 0.85);
+    margin-right: calc(40px * 0.85);
   }
   
   canvas {
