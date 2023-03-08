@@ -133,6 +133,7 @@ body {
   width: 4px;
   left: 160px;
   top: 35px;
+  margin-bottom: 30px;
   background: #c2c1c1;
   border-radius: 4px;
   transform: rotate(-25deg);
