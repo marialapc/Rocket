@@ -1,5 +1,5 @@
 body {
-    background-color: indigo;
+    background-color: rgb(158, 88, 255);
     color: #fff;  
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;
@@ -27,19 +27,39 @@ body {
     flex-wrap: wrap;
     margin: 0 auto;
     width: 100%;
+    margin-right: 170px;
   }
   
   button {
-    background-color: #fdef05;
+    background-color: #3b3b3b;
     border-radius: 8px;
-    border-color: #ff6600;
+    border-color: #000000;
     font-family: inherit;
     margin: 0;
-    padding: 5px 20px;
-    width: 100px;
+    padding: 6px 6px;
   }
-  button:not(:last-child) {
-    margin-right: 10px;
+
+  
+
+ 
+
+  .arrowUp{
+    height: 20px;
+    width: 25px;
+  }
+  .arrowLeft{
+    height: 20px;
+    width: 25px;
+  }
+  
+  .arrowRight{
+    height: 20px;
+    width: 25px;
+  }
+
+  .arrowDown{
+    height: 20px;
+    width: 25px;
   }
   
   .messages {
@@ -57,6 +77,6 @@ body {
   }
   
   @media (max-width: 440px) {
-    button { margin-top: 5px; }
+    button { margin-right: 15px; margin-left: 15px; }
     #up, #down { margin-left: 100%; margin-right: 100%; }
   }
