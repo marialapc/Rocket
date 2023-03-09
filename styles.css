@@ -179,11 +179,23 @@ body {
 }
 
 
-
-
+.record{
+font-family: karmatic arcade, sans-serif;
+font-weight: 100;
+margin-left: 20px;
+margin-top: 20px;
+font-size: 14px;
+margin-bottom: 30px;
+}
 .time{
-  font-family: ;
+  font-family: karmatic arcade, sans-serif;
+  font-size: 16px;
+  font-weight: 100;
 margin-top: 15px;
+}
+
+.result{
+  margin: 0px;
 }
 
   
