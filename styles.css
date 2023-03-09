@@ -68,8 +68,8 @@ body {
     flex-wrap: wrap;
     margin: 0 auto;
     width: 100%;
-    margin-right: 200px;
-   margin-top: 23px;
+    margin-right: 180px;
+   margin-top: 25px;
   }
   
   button {
@@ -200,12 +200,6 @@ margin-top: 15px;
   font-family: 'Press Start 2p', cursive;
   font-size: 12px;
   font-weight:lighter;
-  letter-spacing: 5px;
-  text-shadow: -2px 0 0 #fdff2a,
-    -4px 0 0 #df4a42,
-    2px 0 0 #91fcfe,
-    4px 0 0 #4405fc;
-  animation: blink 1s steps(4, start) infinite
 }
 
 .brand{
@@ -216,7 +210,7 @@ margin-top: 15px;
   gap: 4px;
   margin-right: 230px;
   height: 12px;
-  margin-top: 10px;
+  margin-top: 50px;
 
 }
 .brandname{
@@ -232,7 +226,7 @@ margin-top: 15px;
   width: 12px;
 }
   
-  @media (max-width: 440px) {
+  @media (max-width: 1220px) {
     button { margin-right: 15px; margin-left: 15px; }
     #up, #down { margin-left: 100%; margin-right: 100%; }
   }
