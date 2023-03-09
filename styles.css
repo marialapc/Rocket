@@ -15,10 +15,11 @@ body {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    width: 100vw;
     touch-action: none;
-    user-select: none;
     -webkit-user-select: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
   .gameboy {
     position: relative;
@@ -56,8 +57,9 @@ body {
     border: 15px solid #02eea3;
     border-radius: 8px;
     background-image: url('./icons/background3.jpg');
-    margin-right: 30px;
-    margin-top: 45px;
+  width: 79%;
+  position: relative;
+  top: 7%;
   }
 
   .btns {
