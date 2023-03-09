@@ -120,30 +120,30 @@ function startGame() {
     });
   });
 
-  movePlayer(5)
+  movePlayer()
 }
 
 //print the rocket (step 9) and catch de astronaut (step 12)
-function movePlayer(tolerance) {
-  const catchTheAstronautX = Math.abs(playerPosition.x - astronautPosition.x) <= tolerance;
-  const catchTheAstronautY = Math.abs(playerPosition.y - astronautPosition.y) <= tolerance;
+function movePlayer(){
+  const catchTheAstronautX = playerPosition.x.toFixed(3) === astronautPosition.x.toFixed(3);
+  const catchTheAstronautY = playerPosition.y.toFixed(3) === astronautPosition.y.toFixed(3);
   const catchTheAstronaut = catchTheAstronautX && catchTheAstronautY;
-
-  if (catchTheAstronaut) {
-    console.log('catch');
-    levelWin();
+  
+ if (catchTheAstronaut){
+  console.log('catch');
+ levelWin();
   }
-
+ 
+ // (step 13)
   const rockCollision = rockPosition.find(rock => {
-    const rockCollisionX = Math.abs(rock.x - playerPosition.x) <= tolerance;
-    const rockCollisionY = Math.abs(rock.y - playerPosition.y) <= tolerance;
+    const rockCollisionX =  rock.x.toFixed(3) === playerPosition.x.toFixed(3);
+    const rockCollisionY =  rock.y.toFixed(3) === playerPosition.y.toFixed(3);
     return rockCollisionX && rockCollisionY;
   });
 
-  if (rockCollision) {
-    levelFail();
-  }
-
+  if (rockCollision){
+   levelFail();
+      }
   game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y);
 }
 
