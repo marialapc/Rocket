@@ -129,6 +129,31 @@ body {
     border-radius: 100%;
   }
 
+  .restartText{
+    font-size: 8px;
+    margin-top: 90px;
+    display: block;
+    margin-left: 60px;
+    transform: rotate(-20deg);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight:900;
+    color: rgb(27, 27, 27);
+    
+  }
+
+
+  .pauseText{
+    font-size: 8px;
+    margin-top: 55px;
+    display: block;
+    margin-left: 10px;
+    transform: rotate(-20deg);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight:900;
+    color: rgb(27, 27, 27);
+    
+  }
+
  .speakers{
   content: "";
   position: relative;
@@ -211,7 +236,7 @@ margin-bottom: 0px;
   align-items: center;
   justify-content: center;
   gap: 4px;
-  margin-right: 230px;
+  margin-right:0px;
   height: 12px;
   margin-top: 50px;
 
