@@ -21,7 +21,9 @@ let timePlayer;
 let timeInterval;
 
 let paused = false;
-let moveListener;
+
+
+
 
 const playerPosition = { x: undefined, y: undefined };
 const astronautPosition = { x: undefined, y: undefined,};
@@ -175,8 +177,8 @@ btnUp.addEventListener ('click', moveUp);
 btnLeft.addEventListener ('click', moveLeft);
 btnRight.addEventListener ('click', moveRight);
 btnDown.addEventListener ('click', moveDown);
-restartButton.addEventListener('click', restartGame);
-pauseButton.addEventListener('click', pauseGame);
+
+
 
 
 function moveByKeys(event) {
@@ -223,6 +225,10 @@ function moveDown() {
   }
 }
 
+
+restartButton.addEventListener('click', restartGame);
+pauseButton.addEventListener('click', togglePause)
+
 function restartGame() {
   level = 0;
   lives = 3;
@@ -232,17 +238,19 @@ function restartGame() {
   startGame();
 }
 
-function pauseGame(){
-  if (!paused) { 
-    clearInterval(timeInterval);
-    window.removeEventListener('keydown', moveByKeys);
+function togglePause(){
+  if (!paused) {
     paused = true;
-  } else { 
-    timeInterval = setInterval(showTime, 100);
-    window.addEventListener('keydown', moveByKeys);
+    clearInterval(timeInterval);
+    document.removeEventListener('keydown', movePlayer);
+  } else {
     paused = false;
+    timeInterval = setInterval(showTime, 100);
+    document.addEventListener('keydown', movePlayer);
+    movePlayer();
   }
 }
+
 
 
 
