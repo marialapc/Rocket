@@ -169,18 +169,18 @@ body {
 }
 
 .messages{
-  margin-top: 50px;
+  margin-top: 30px;
   display: flex;
   flex-direction:row;
   justify-content: center;
   align-items: center;
   gap: 45px;
-  margin-right: 20px;
+  margin-right: 65px;
 }
 
 
 .record{
-font-family: karmatic arcade, sans-serif;
+  font-family: 'Press Start 2p', cursive;
 font-weight: 100;
 margin-left: 20px;
 margin-top: 20px;
@@ -188,14 +188,22 @@ font-size: 14px;
 margin-bottom: 30px;
 }
 .time{
-  font-family: karmatic arcade, sans-serif;
-  font-size: 16px;
-  font-weight: 100;
+  font-family: 'Press Start 2p', cursive;
+  font-size: 14px;
+  font-weight:lighter;
 margin-top: 15px;
 }
 
 .result{
-  margin: 0px;
+  font-family: 'Press Start 2p', cursive;
+  font-size: 12px;
+  font-weight:lighter;
+  letter-spacing: 5px;
+  text-shadow: -2px 0 0 #fdff2a,
+    -4px 0 0 #df4a42,
+    2px 0 0 #91fcfe,
+    4px 0 0 #4405fc;
+  animation: blink 1s steps(4, start) infinite
 }
 
 .brand{
@@ -214,7 +222,6 @@ margin-top: 15px;
   font-weight:900;
   font-size: 12px;
   color: rgb(27, 27, 27);
-
 
 }
 
