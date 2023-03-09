@@ -171,13 +171,16 @@ body {
 }
 
 .messages{
-  margin-top: 30px;
+  margin-top: 20px;
   display: flex;
   flex-direction:row;
   justify-content: center;
   align-items: center;
   gap: 45px;
   margin-right: 65px;
+  height: 12px;
+  margin-top: 30px;
+  margin-bottom: 5px;
 }
 
 
@@ -186,19 +189,19 @@ body {
 font-weight: 100;
 margin-left: 20px;
 margin-top: 20px;
-font-size: 14px;
-margin-bottom: 30px;
+font-size: 12px;
+margin-bottom: 0px;
 }
 .time{
   font-family: 'Press Start 2p', cursive;
-  font-size: 14px;
+  font-size: 12px;
   font-weight:lighter;
-margin-top: 15px;
+  height: 12px;
 }
 
 .result{
   font-family: 'Press Start 2p', cursive;
-  font-size: 12px;
+  font-size: 10px;
   font-weight:lighter;
 }
 
@@ -226,7 +229,7 @@ margin-top: 15px;
   width: 12px;
 }
   
-  @media (max-width: 1220px) {
+  @media (max-width: 2020px) {
     button { margin-right: 15px; margin-left: 15px; }
     #up, #down { margin-left: 100%; margin-right: 100%; }
   }
