@@ -67,7 +67,7 @@ body {
     margin: 0 auto;
     width: 100%;
     margin-right: 200px;
-   margin-top: 50px;
+   margin-top: 23px;
   }
   
   button {
@@ -133,7 +133,7 @@ body {
   height: 40px;
   width: 4px;
   left: 160px;
-  top: 35px;
+  top: 23px;
   margin-bottom: 30px;
   background: #c2c1c1;
   border-radius: 4px;
@@ -198,6 +198,30 @@ margin-top: 15px;
   margin: 0px;
 }
 
+.brand{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-right: 230px;
+  height: 14px;
+  margin-top: 10px;
+
+}
+.brandname{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight:bolder;
+  font-size: 14px;
+  color: rgb(27, 27, 27);
+
+
+}
+
+.rocket{
+  height: 14px;
+  width: 14px;
+}
   
   @media (max-width: 440px) {
     button { margin-right: 15px; margin-left: 15px; }
