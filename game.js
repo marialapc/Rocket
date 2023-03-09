@@ -8,6 +8,8 @@ const spanLives = document.querySelector('#lives');
 const spanTime = document.querySelector('#time');
 const spanRecord = document.querySelector('#record');
 const pResult = document.querySelector('#result')
+const restartButton = document.querySelector('#restart-button');
+const pauseButton = document.querySelector('#pause-button');
 
 let canvasSize;
 let elementSize;
@@ -18,124 +20,91 @@ let timeStart;
 let timePlayer;
 let timeInterval;
 
+let paused = false;
+let moveListener;
 
-// (step9)
-const playerPosition = {
-  x: undefined,
-  y: undefined,
-  
-};
-
-//(step 12)
-const astronautPosition = {
-  x: undefined,
-  y: undefined,
-};
-
-//(step13)
+const playerPosition = { x: undefined, y: undefined };
+const astronautPosition = { x: undefined, y: undefined,};
 let rockPosition = [];
+
 
 window.addEventListener("load", setCanvasSize);
 window.addEventListener("resize", setCanvasSize);
 
-function setCanvasSize() {
-  //resize canvas
+function fixNumber(n){
+  return Number(n.toFixed(2));
+}
 
+
+function setCanvasSize() { //resize canvas
   if (window.innerHeight > window.innerWidth) {
     canvasSize = window.innerWidth * 0.7;
   } else {
     canvasSize = window.innerHeight * 0.7;
   }
-
   canvasSize = Number(canvasSize.toFixed(0));
-
   canvas.setAttribute("width", canvasSize);
   canvas.setAttribute("height", canvasSize);
-
   elementSize = canvasSize / 10;
-
   playerPosition.x = undefined;
   playerPosition.y = undefined;
   startGame();
 }
 
 function startGame() {
-  // import elements
-
+ console.log({canvasSize, elementSize});
   game.font = elementSize + "px Verdana";
   game.textAlign = "end";
-
-  // split the elements in rows whitout spaces in 10 positions (step 6)
-  const map = maps[level];
-
+  const map = maps[level];   // split the elements in rows whitout spaces in 10 positions (step 6)
   if (!map){
     gameWin();
     return;
   }
-
   if (!timeStart){
     timeStart = Date.now();
     timeInterval = setInterval(showTime, 100);
     showRecord();
   }
 
-  const mapRows = map.trim().split('\n');
-  const mapRowCols = mapRows.map(row => row.trim().split(''));
+  const mapRows = map.trim().split("\n");
+  const mapRowCols = mapRows.map(row => row.trim().split(""));
   showLives();
-
-  //  print the element (step 6)
-  //    for (let row = 1; row <= 10; row++){
-  //      for (let col = 1; col <= 10; col++){
-  //       game.fillText(emojis[mapRowCols[row-1][col-1]],
-  //       elementSize * col, elementSize * row);
-  //     }
-  //   }
-
   rockPosition = [];
-  //delete the rocket old position (step 10)
-  game.clearRect(0,0, canvasSize,canvasSize);
-  //print the elements refactor (step 7)
-  mapRowCols.forEach((row, rowI) => {
+  game.clearRect(0,0, canvasSize,canvasSize);   //delete the rocket old position (step 10)
+  mapRowCols.forEach((row, rowI) => {   //print the elements (step 7)
     row.forEach((col, colI) => {
       const emoji = emojis[col];
       const posX = elementSize * (colI + 1);
       const posY = elementSize * (rowI + 1);
-
-      if (col === 'O'){
-      if (!playerPosition.x && !playerPosition.y)  {
-      playerPosition.x = posX;
-      playerPosition.y = posY;
+      if (col === "O"){
+        if (!playerPosition.x && !playerPosition.y)  {
+         playerPosition.x = posX;
+         playerPosition.y = posY;
       }
-    } else if (col === 'I'){
+    } else if (col === "I"){
       astronautPosition.x = posX;
       astronautPosition.y = posY;
-    } else if (col == 'X'){
-      rockPosition.push({
-        x: posX,
-        y: posY,
-      });
+    } else if (col === "X"){
+      rockPosition.push({ x: posX, y: posY });
     }
-
-      game.fillText(emoji, posX, posY);
+    game.fillText(emoji, posX, posY);
     });
   });
-
-  movePlayer()
+  movePlayer();
 }
 
-//print the rocket (step 9) and catch de astronaut (step 12)
-function movePlayer(){
-  const catchTheAstronautX = playerPosition.x.toFixed(3) === astronautPosition.x.toFixed(3);
-  const catchTheAstronautY = playerPosition.y.toFixed(3) === astronautPosition.y.toFixed(3);
-  const catchTheAstronaut = catchTheAstronautX && catchTheAstronautY;
-  
+function movePlayer(){ //print the rocket (step 9) and catch de astronaut (step 12)
+  const catchTheAstronautX =
+    playerPosition.x.toFixed(3) === astronautPosition.x.toFixed(3);
+  const catchTheAstronautY =
+   playerPosition.y.toFixed(3) === astronautPosition.y.toFixed(3);
+  const catchTheAstronaut = 
+  catchTheAstronautX && catchTheAstronautY;
  if (catchTheAstronaut){
-  console.log('catch');
  levelWin();
   }
  
- // (step 13)
-  const rockCollision = rockPosition.find(rock => {
+  const rockCollision = rockPosition.find((rock) => {
     const rockCollisionX =  rock.x.toFixed(3) === playerPosition.x.toFixed(3);
     const rockCollisionY =  rock.y.toFixed(3) === playerPosition.y.toFixed(3);
     return rockCollisionX && rockCollisionY;
@@ -143,13 +112,11 @@ function movePlayer(){
 
   if (rockCollision){
    levelFail();
-      }
-  game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y);
+  }
+  game.fillText(emojis["PLAYER"], playerPosition.x, playerPosition.y);
 }
 
-
 function levelWin(){
-  console.log('subiste de nivel');
   level++;
   startGame();
 }
@@ -163,38 +130,36 @@ function levelFail(){
   }
   playerPosition.x = undefined;
   playerPosition.y = undefined;
-    startGame();
+  startGame();
 }
-// to refactor ( separar en dos funciones)
-function gameWin(){
+
+
+function gameWin(){ // to refactor ( separar en dos funciones)
   console.log('you win');
   clearInterval(timeInterval);
-//(step 19)
-  const recordTime = localStorage.getItem('record_time');
+  const recordTime = localStorage.getItem('record_time'); //(step 19)
   const playerTime = Date.now() - timeStart;
-
-    if (recordTime){
-    if (recordTime >= playerTime){
+  if (recordTime){
+    if (recordTime >= playerTime) {
       localStorage.setItem('record_time', playerTime);
-    pResult.innerHTML = ('superaste el record');
+    pResult.innerHTML = ('Superaste el record');
     } else {
-    pResult.innerHTML = ('no superaste el record');
+    pResult.innerHTML = ('No superaste el record');
     }
   } else {
     localStorage.setItem('record_time', playerTime);
-    pResult.innerHTML = 'Primera vez? intenta superar tu tiempo';
+    pResult.innerHTML = 'Primera vez? Intenta superar tu tiempo';
   }
-
-
   console.log(recordTime, playerTime);
 }
-//(step 16)
-function showLives(){
+
+function showLives(){ //(step 16)
   const heartsArray = Array(lives).fill(emojis['HEART']);
   spanLives.innerHTML = '';
-  heartsArray.forEach(heart => spanLives.append(heart));
- 
+  heartsArray.forEach( (heart) => spanLives.append(heart));
 }
+
+
 function showTime(){
    spanTime.innerHTML = Date.now() - timeStart;
 }
@@ -203,56 +168,81 @@ function showRecord(){
 }
 
 
- // listen the keyboard(step 8)
+ // listen the keyboard
 
 window.addEventListener('keydown', moveByKeys);
 btnUp.addEventListener ('click', moveUp);
 btnLeft.addEventListener ('click', moveLeft);
 btnRight.addEventListener ('click', moveRight);
 btnDown.addEventListener ('click', moveDown);
+restartButton.addEventListener('click', restartGame);
+pauseButton.addEventListener('click', pauseGame);
 
 
 function moveByKeys(event) {
  if ( event.key === 'ArrowUp') moveUp();
- else if (event.key == 'ArrowLeft') moveLeft();
- else if (event.key == 'ArrowRight') moveRight();
- else if (event.key == 'ArrowDown') moveDown();
+ else if (event.key === 'ArrowLeft') moveLeft();
+ else if (event.key === 'ArrowRight') moveRight();
+ else if (event.key === 'ArrowDown') moveDown();
  }
 
-// move the rocket  and respect the canvas (step 11)
 
-function moveUp() {
-  if ((playerPosition.y - elementSize) < elementSize){
+function moveUp() { // move the rocket  and respect the canvas (step 11)
+  if (playerPosition.y - elementSize < elementSize){
     console.log('out');
-  }else {
-  playerPosition.y -= elementSize;
-  startGame();
+  } else {
+    playerPosition.y -= elementSize;
+    startGame();
   }
 }
 
 function moveLeft() {
- if( (playerPosition.x - elementSize) < elementSize){
+ if(playerPosition.x - elementSize < elementSize){
   console.log('out');
- }else{
- playerPosition. x -= elementSize;
-  startGame();
+ } else{
+   playerPosition. x -= elementSize;
+   startGame();
 }
 };
 
 function moveRight() {
-  if ((playerPosition.x + elementSize) > canvasSize){
+  if (playerPosition.x + elementSize > canvasSize){
     console.log('out');
-    }else{
-  playerPosition.x += elementSize;
+  } else{
+    playerPosition.x += elementSize;
     startGame();
     }
 }
 
 function moveDown() {
-  if ((playerPosition.y+ elementSize) > canvasSize){
+  if (playerPosition.y + elementSize > canvasSize) {
     console.log('out');
-    }else{
-  playerPosition.y += elementSize;
+  } else{
+    playerPosition.y += elementSize;
     startGame();
-    }
+  }
 }
+
+function restartGame() {
+  level = 0;
+  lives = 3;
+  timeStart = undefined;
+  playerPosition.x = undefined;
+  playerPosition.y = undefined;
+  startGame();
+}
+
+function pauseGame(){
+  if (!paused) { 
+    clearInterval(timeInterval);
+    window.removeEventListener('keydown', moveByKeys);
+    paused = true;
+  } else { 
+    timeInterval = setInterval(showTime, 100);
+    window.addEventListener('keydown', moveByKeys);
+    paused = false;
+  }
+}
+
+
+
