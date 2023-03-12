@@ -22,8 +22,9 @@ let timeInterval;
 
 let paused = false;
 
-const playerPosition = { x: undefined, y: undefined };
-const astronautPosition = { x: undefined, y: undefined };
+const playerPosition = { x: null, y: null };
+
+const astronautPosition = { x: null, y: null };
 let rockPosition = [];
 
 window.addEventListener("load", setCanvasSize);
@@ -44,70 +45,86 @@ function setCanvasSize() {
   canvas.setAttribute("width", canvasSize);
   canvas.setAttribute("height", canvasSize);
   elementSize = canvasSize / 10;
-  playerPosition.x = undefined;
-  playerPosition.y = undefined;
-  startGame();
+  playerPosition.x = null;
+  playerPosition.y = null;
+  update();
 }
 
-function startGame() {
+function update () {
+  // Set UI elements:
   pResult.innerHTML = '';
- console.log({canvasSize, elementSize});
   game.font = elementSize + "px Verdana";
   game.textAlign = "end";
-  const map = maps[level]; // split the elements in rows whitout spaces in 10 positions (step 6)
+
+  // Check if there is a map for the current level:
+  const map = maps[level];
   if (!map) {
     gameWin();
     return;
   }
+
+  // Start the timer
   if (!timeStart) {
     timeStart = Date.now();
     timeInterval = setInterval(showTime, 100);
     showRecord();
   }
 
+  // Show the lives
+  showLives();
+
+  // Prepare the map to be drawn:
   const mapRows = map.trim().split("\n");
   const mapRowCols = mapRows.map((row) => row.trim().split(""));
-  showLives();
   rockPosition = [];
-  game.clearRect(0, 0, canvasSize, canvasSize); //delete the rocket old position (step 10)
+  // Delete the rocket old position (step 10)
+  game.clearRect(0, 0, canvasSize, canvasSize); 
+
+  // Draw the map:
   mapRowCols.forEach((row, rowI) => {
-    //print the elements (step 7)
-    row.forEach((col, colI) => {if (!paused) {
-      paused = true;
-      clearInterval(timeInterval);
-      document.removeEventListener('keydown', movePlayer);
-    } else {
-      paused = false;
-      timeInterval = setInterval(showTime, 100);
-      document.addEventListener('keydown', movePlayer);
-      movePlayer();
-    }
+    row.forEach((col, colI) => {
+      // Handle the pause logic:
+      if (!paused) {
+        paused = true;
+        clearInterval(timeInterval);
+        document.removeEventListener('keydown', checkCollisionWithAstronautAndRocks);
+      } else {
+        paused = false;
+        timeInterval = setInterval(showTime, 100);
+        document.addEventListener('keydown', checkCollisionWithAstronautAndRocks);
+      }
+      // Update the position of the all elements:
       const emoji = emojis[col];
       const posX = elementSize * (colI + 1);
       const posY = elementSize * (rowI + 1);
+      // Is a cell ocupped by the earth?
       if (col === "O") {
+        // 
         if (!playerPosition.x && !playerPosition.y) {
           playerPosition.x = posX;
           playerPosition.y = posY;
         }
+        // Is a cell ocupped by the astronaut?
       } else if (col === "I") {
         astronautPosition.x = posX;
         astronautPosition.y = posY;
+        // Is a cell occuped by some rock?
       } else if (col === "X") {
         rockPosition.push({ x: posX, y: posY });
       }
+      // Draw elements in the canvas:
       game.fillText(emoji, posX, posY);
     });
   });
-  movePlayer();
+  // Check if the player is in the same position as the astronaut or rocks:
+  checkCollisionWithAstronautAndRocks();
 }
 
-function movePlayer() {
+function checkCollisionWithAstronautAndRocks() {
+  if (paused) return
   //print the rocket (step 9) and catch de astronaut (step 12)
-  const catchTheAstronautX =
-    playerPosition.x.toFixed(3) === astronautPosition.x.toFixed(3);
-  const catchTheAstronautY =
-    playerPosition.y.toFixed(3) === astronautPosition.y.toFixed(3);
+  const catchTheAstronautX = playerPosition.x.toFixed(3) === astronautPosition.x.toFixed(3);
+  const catchTheAstronautY = playerPosition.y.toFixed(3) === astronautPosition.y.toFixed(3);
   const catchTheAstronaut = catchTheAstronautX && catchTheAstronautY;
   if (catchTheAstronaut) {
     levelWin();
@@ -127,8 +144,9 @@ function movePlayer() {
 
 function levelWin() {
   level++;
-  startGame();
+  update();
 }
+
 function levelFail() {
   lives--;
 
@@ -139,7 +157,7 @@ function levelFail() {
   }
   playerPosition.x = undefined;
   playerPosition.y = undefined;
-  startGame();
+  update();
 }
 
 function gameWin() {
@@ -172,6 +190,7 @@ function showLives() {
 function showTime() {
   spanTime.innerHTML = Date.now() - timeStart;
 }
+
 function showRecord() {
   spanRecord.innerHTML = localStorage.getItem("record_time");
 }
@@ -184,47 +203,56 @@ btnLeft.addEventListener("click", moveLeft);
 btnRight.addEventListener("click", moveRight);
 btnDown.addEventListener("click", moveDown);
 
+const moveByButtons = {
+  ArrowUp: moveUp,
+  ArrowLeft: moveLeft,
+  ArrowRight: moveRight,
+  ArrowDown: moveDown,
+};
+
 function moveByKeys(event) {
-  if (event.key === "ArrowUp") moveUp();
-  else if (event.key === "ArrowLeft") moveLeft();
-  else if (event.key === "ArrowRight") moveRight();
-  else if (event.key === "ArrowDown") moveDown();
+  if (!moveByButtons[event.key]) return;
+  moveByButtons[event.key]();
 }
 
 function moveUp() {
+  if (paused) return;
   // move the rocket  and respect the canvas (step 11)
-  if (playerPosition.y - elementSize < elementSize) {
+  if ((playerPosition.y.toFixed(3) - elementSize) < elementSize) {
     console.log("out");
   } else {
     playerPosition.y -= elementSize;
-    startGame();
+    update();
   }
 }
 
 function moveLeft() {
-  if (playerPosition.x - elementSize < elementSize) {
+  if (paused) return;
+  if (playerPosition.x.toFixed(3) - elementSize < elementSize) {
     console.log("out");
   } else {
     playerPosition.x -= elementSize;
-    startGame();
+    update();
   }
 }
 
 function moveRight() {
-  if (playerPosition.x + elementSize > canvasSize) {
+  if (paused) return;
+  if (playerPosition.x.toFixed(3) + elementSize > canvasSize) {
     console.log("out");
   } else {
     playerPosition.x += elementSize;
-    startGame();
+    update();
   }
 }
 
 function moveDown() {
-  if (playerPosition.y + elementSize > canvasSize) {
+  if (paused) return;
+  if (playerPosition.y.toFixed(3) + elementSize > canvasSize) {
     console.log("out");
   } else {
     playerPosition.y += elementSize;
-    startGame();
+    update();
   }
 }
 
@@ -234,21 +262,21 @@ pauseButton.addEventListener("click", togglePause);
 function restartGame() {
   level = 0;
   lives = 3;
-  timeStart = undefined;
-  playerPosition.x = undefined;
-  playerPosition.y = undefined;
-  startGame();
+  timeStart = null;
+  playerPosition.x = null;
+  playerPosition.y = null;
+  update();
 }
 
 function togglePause() {
   if (!paused) {
     paused = true;
     clearInterval(timeInterval);
-    document.removeEventListener("keydown", movePlayer);
+    document.removeEventListener("keydown", checkCollisionWithAstronautAndRocks);
   } else {
     paused = false;
     timeInterval = setInterval(showTime, 100);
-    document.addEventListener("keydown", movePlayer);
-    movePlayer();
+    document.addEventListener("keydown", checkCollisionWithAstronautAndRocks);
+    checkCollisionWithAstronautAndRocks();
   }
 }
