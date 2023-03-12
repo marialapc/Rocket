@@ -50,7 +50,8 @@ function setCanvasSize() {
 }
 
 function startGame() {
-  console.log({ canvasSize, elementSize });
+  pResult.innerHTML = '';
+ console.log({canvasSize, elementSize});
   game.font = elementSize + "px Verdana";
   game.textAlign = "end";
   const map = maps[level]; // split the elements in rows whitout spaces in 10 positions (step 6)
