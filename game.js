@@ -16,6 +16,8 @@ let elementSize;
 let level = 0;
 let lives = 3;
 
+const map = maps[level];
+
 let timeStart;
 let timePlayer;
 let timeInterval;
@@ -50,7 +52,15 @@ function setCanvasSize() {
   update();
 }
 
+function setUIElements() {
+  pResult.innerHTML = '';
+  game.font = elementSize + "px Verdana";
+  game.textAlign = "end";
+}
+
 function update () {
+
+  
   // Set UI elements:
   pResult.innerHTML = '';
   game.font = elementSize + "px Verdana";
