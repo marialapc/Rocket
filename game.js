@@ -72,6 +72,7 @@ function update () {
 
   // Show the lives
   showLives();
+  
 
   // Prepare the map to be drawn:
   const mapRows = map.trim().split("\n");
@@ -84,14 +85,10 @@ function update () {
   mapRowCols.forEach((row, rowI) => {
     row.forEach((col, colI) => {
       // Handle the pause logic:
-      if (!paused) {
-        paused = true;
+      if (paused) {
         clearInterval(timeInterval);
         document.removeEventListener('keydown', checkCollisionWithAstronautAndRocks);
-      } else {
-        paused = false;
-        timeInterval = setInterval(showTime, 100);
-        document.addEventListener('keydown', checkCollisionWithAstronautAndRocks);
+      return;
       }
       // Update the position of the all elements:
       const emoji = emojis[col];
