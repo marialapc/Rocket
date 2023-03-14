@@ -70,14 +70,20 @@ function deleteRocketOldPosition(){
   game.clearRect(0, 0, canvasSize, canvasSize); 
 }
 
+// function IsPaused(){
+//   if (paused) {
+//     clearInterval(timeInterval);
+//     document.removeEventListener('keydown', checkCollisionWithAstronautAndRocks);
+//   return;
+//   }
+// }
 
 function update () {
   setUIElements();
   startTimer();
   showLives();
   deleteRocketOldPosition();
-  
-  
+
   // Check if there is a map for the current level:
   const map = maps[level];
   if (!map) {
@@ -93,12 +99,12 @@ function update () {
   // Draw the map:
   mapRowCols.forEach((row, rowI) => {
     row.forEach((col, colI) => {
-      // Handle the pause logic:
+      // Handle the pause logic:    AAAAAAAAAAAAAAAAA
       if (paused) {
         clearInterval(timeInterval);
-        document.removeEventListener('keydown', checkCollisionWithAstronautAndRocks);
-      return;
-      }
+         document.removeEventListener('keydown', checkCollisionWithAstronautAndRocks);
+       return;
+       }
       // Update the position of the all elements:
       const emoji = emojis[col];
       const posX = elementSize * (colI + 1);
