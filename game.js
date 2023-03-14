@@ -58,38 +58,37 @@ function setUIElements() {
   game.textAlign = "end";
 }
 
+function startTimer() {
+  if (!timeStart) {
+    timeStart = Date.now();
+    timeInterval = setInterval(showTime, 100);
+    showRecord();
+  }
+}
+
+function deleteRocketOldPosition(){
+  game.clearRect(0, 0, canvasSize, canvasSize); 
+}
+
+
 function update () {
-
+  setUIElements();
+  startTimer();
+  showLives();
+  deleteRocketOldPosition();
   
-  // Set UI elements:
-  pResult.innerHTML = '';
-  game.font = elementSize + "px Verdana";
-  game.textAlign = "end";
-
+  
   // Check if there is a map for the current level:
   const map = maps[level];
   if (!map) {
     gameWin();
     return;
   }
-
-  // Start the timer
-  if (!timeStart) {
-    timeStart = Date.now();
-    timeInterval = setInterval(showTime, 100);
-    showRecord();
-  }
-
-  // Show the lives
-  showLives();
   
-
   // Prepare the map to be drawn:
   const mapRows = map.trim().split("\n");
   const mapRowCols = mapRows.map((row) => row.trim().split(""));
   rockPosition = [];
-  // Delete the rocket old position (step 10)
-  game.clearRect(0, 0, canvasSize, canvasSize); 
 
   // Draw the map:
   mapRowCols.forEach((row, rowI) => {
@@ -123,7 +122,7 @@ function update () {
       game.fillText(emoji, posX, posY);
     });
   });
-  // Check if the player is in the same position as the astronaut or rocks:
+
   checkCollisionWithAstronautAndRocks();
 }
 
