@@ -1,3 +1,4 @@
+import { maps, emojis } from "./maps.mjs";
 const canvas = document.querySelector("#game");
 const game = canvas.getContext("2d");
 const btnUp = document.querySelector("#up");
@@ -11,33 +12,31 @@ const pResult = document.querySelector("#result");
 const restartButton = document.querySelector("#restart-button");
 const pauseButton = document.querySelector("#pause-button");
 
+const SECOND_IN_MILLISECONDS = 1000;
+
 let canvasSize;
 let elementSize;
 let level = 0;
 let lives = 3;
 
-const map = maps[level];
-
-let timeStart;
-let timePlayer;
+let timeStart = 0;
 let timeInterval;
-
 let paused = false;
 
 const playerPosition = { x: null, y: null };
-
 const astronautPosition = { x: null, y: null };
 let rockPosition = [];
 
-window.addEventListener("load", setCanvasSize);
-window.addEventListener("resize", setCanvasSize);
-
-function fixNumber(n) {
-  return Number(n.toFixed(2));
+// THE FIRST FUNCTION TO BE EXECUTED
+// WHEN THE PAGE IS LOADED:
+function initialLoad() {
+  setCanvasSize();
+  setUIElements();
+  update();
+  startTimer();
 }
 
 function setCanvasSize() {
-  //resize canvas
   if (window.innerHeight > window.innerWidth) {
     canvasSize = window.innerWidth * 0.7;
   } else {
@@ -49,113 +48,113 @@ function setCanvasSize() {
   elementSize = canvasSize / 10;
   playerPosition.x = null;
   playerPosition.y = null;
-  update();
 }
 
-function setUIElements() {
-  pResult.innerHTML = '';
-  game.font = elementSize + "px Verdana";
-  game.textAlign = "end";
+// ROCKET FUNCTIONS:
+function resetRocketPosition() {
+  playerPosition.x = null;
+  playerPosition.y = null;
 }
 
-function startTimer() {
-  if (!timeStart) {
-    timeStart = Date.now();
-    timeInterval = setInterval(showTime, 100);
-    showRecord();
-  }
+function deleteRocket() {
+  game.clearRect(0, 0, canvasSize, canvasSize);
 }
 
-function deleteRocketOldPosition(){
-  game.clearRect(0, 0, canvasSize, canvasSize); 
+function drawRocket() {
+  game.fillText(emojis["PLAYER"], playerPosition.x, playerPosition.y);
 }
 
-// function IsPaused(){
-//   if (paused) {
-//     clearInterval(timeInterval);
-//     document.removeEventListener('keydown', checkCollisionWithAstronautAndRocks);
-//   return;
-//   }
-// }
-
-function update () {
-  setUIElements();
-  startTimer();
-  showLives();
-  deleteRocketOldPosition();
-
-  // Check if there is a map for the current level:
-  const map = maps[level];
-  if (!map) {
-    gameWin();
-    return;
-  }
-  
+// MAP FUNCTIONS:
+function prepareMap() {
   // Prepare the map to be drawn:
+  const map = maps[level];
   const mapRows = map.trim().split("\n");
   const mapRowCols = mapRows.map((row) => row.trim().split(""));
-  rockPosition = [];
+  return mapRowCols;
+}
 
-  // Draw the map:
+function drawMap() {
+  const mapRowCols = prepareMap();
+  rockPosition = [];
   mapRowCols.forEach((row, rowI) => {
     row.forEach((col, colI) => {
-      // Handle the pause logic:    AAAAAAAAAAAAAAAAA
-      if (paused) {
-        clearInterval(timeInterval);
-         document.removeEventListener('keydown', checkCollisionWithAstronautAndRocks);
-       return;
-       }
-      // Update the position of the all elements:
+      // Update the position of the element in the canvas
+      // according to the size of the element
+      // and the position of the element in the map (rowI and colI):
       const emoji = emojis[col];
       const posX = elementSize * (colI + 1);
       const posY = elementSize * (rowI + 1);
       // Is a cell ocupped by the earth?
       if (col === "O") {
-        // 
+        // Set the position of the earth:
         if (!playerPosition.x && !playerPosition.y) {
           playerPosition.x = posX;
           playerPosition.y = posY;
         }
         // Is a cell ocupped by the astronaut?
       } else if (col === "I") {
+        // Set the position of the astronaut:
         astronautPosition.x = posX;
         astronautPosition.y = posY;
         // Is a cell occuped by some rock?
       } else if (col === "X") {
+        // Add a rock with his position to the array:
         rockPosition.push({ x: posX, y: posY });
       }
-      // Draw elements in the canvas:
+      // Finally, we draw the element in the canvas:
       game.fillText(emoji, posX, posY);
     });
   });
+}
 
+// LOOP OF THE GAME:
+function update() {
+  showLives();
+  deleteRocket();
+  drawMap();
   checkCollisionWithAstronautAndRocks();
+  drawRocket();
+}
+
+// COLLISION DETECTION FUNCTIONS:
+function existsCollisionWithAstronaut() {
+  const catchTheAstronautX = round(playerPosition.x) === round(astronautPosition.x);
+  const catchTheAstronautY = round(playerPosition.y) === round(astronautPosition.y);
+  return catchTheAstronautX && catchTheAstronautY;
+}
+
+function existsCollisionWithRock() {
+  const existsCollisionWithRock = rockPosition.some((rock) => {
+    const rockCollisionX = round(rock.x) === round(playerPosition.x);
+    const rockCollisionY = round(rock.y) === round(playerPosition.y);
+    return rockCollisionX && rockCollisionY;
+  });
+  return existsCollisionWithRock;
 }
 
 function checkCollisionWithAstronautAndRocks() {
-  if (paused) return
-  //print the rocket (step 9) and catch de astronaut (step 12)
-  const catchTheAstronautX = playerPosition.x.toFixed(3) === astronautPosition.x.toFixed(3);
-  const catchTheAstronautY = playerPosition.y.toFixed(3) === astronautPosition.y.toFixed(3);
-  const catchTheAstronaut = catchTheAstronautX && catchTheAstronautY;
-  if (catchTheAstronaut) {
+  if (paused) return;
+  if (existsCollisionWithAstronaut()) {
     levelWin();
   }
-
-  const rockCollision = rockPosition.find((rock) => {
-    const rockCollisionX = rock.x.toFixed(3) === playerPosition.x.toFixed(3);
-    const rockCollisionY = rock.y.toFixed(3) === playerPosition.y.toFixed(3);
-    return rockCollisionX && rockCollisionY;
-  });
-
-  if (rockCollision) {
+  if (existsCollisionWithRock()) {
     levelFail();
   }
-  game.fillText(emojis["PLAYER"], playerPosition.x, playerPosition.y);
+}
+
+// LEVEL (AND GAME) WIN OR FAIL FUNCTONS:
+function checkIfIsTheEndOfGame() {
+  const map = maps[level];
+  return typeof map === 'undefined';
 }
 
 function levelWin() {
   level++;
+  const isTheEndOfGame = checkIfIsTheEndOfGame();
+  if (isTheEndOfGame) {
+    gameWin();
+    return;
+  }
   update();
 }
 
@@ -165,19 +164,16 @@ function levelFail() {
   if (lives <= 0) {
     level = 0;
     lives = 3;
-    timeStart = undefined;
+    timeStart = 0;
   }
-  playerPosition.x = undefined;
-  playerPosition.y = undefined;
+  resetRocketPosition();
   update();
 }
 
 function gameWin() {
-  // to refactor ( separar en dos funciones)
-  console.log("you win");
   clearInterval(timeInterval);
-  const recordTime = localStorage.getItem("record_time"); //(step 19)
-  const playerTime = Date.now() - timeStart;
+  const recordTime = localStorage.getItem("record_time");
+  const playerTime = timeStart;
   if (recordTime) {
     if (recordTime >= playerTime) {
       localStorage.setItem("record_time", playerTime);
@@ -192,29 +188,7 @@ function gameWin() {
   console.log(recordTime, playerTime);
 }
 
-function showLives() {
-  //(step 16)
-  const heartsArray = Array(lives).fill(emojis["HEART"]);
-  spanLives.innerHTML = "";
-  heartsArray.forEach((heart) => spanLives.append(heart));
-}
-
-function showTime() {
-  spanTime.innerHTML = Date.now() - timeStart;
-}
-
-function showRecord() {
-  spanRecord.innerHTML = localStorage.getItem("record_time");
-}
-
-// listen the keyboard
-
-window.addEventListener("keydown", moveByKeys);
-btnUp.addEventListener("click", moveUp);
-btnLeft.addEventListener("click", moveLeft);
-btnRight.addEventListener("click", moveRight);
-btnDown.addEventListener("click", moveDown);
-
+// MOVE THE ROCKET BY BUTTONS:
 const moveByButtons = {
   ArrowUp: moveUp,
   ArrowLeft: moveLeft,
@@ -268,16 +242,41 @@ function moveDown() {
   }
 }
 
-restartButton.addEventListener("click", restartGame);
-pauseButton.addEventListener("click", togglePause);
+// UI ELEMENTS (LIVES, TIME, RECORD):
+function setUIElements() {
+  pResult.innerHTML = '';
+  game.font = elementSize + "px Verdana";
+  game.textAlign = "end";
+}
 
+function showLives() {
+  const heartsArray = Array(lives).fill(emojis["HEART"]);
+  spanLives.innerHTML = "";
+  heartsArray.forEach((heart) => spanLives.append(heart));
+}
+
+function showRecord() {
+  spanRecord.innerHTML = localStorage.getItem("record_time");
+}
+
+function startTimer() {
+  timeInterval = setInterval(showTime, SECOND_IN_MILLISECONDS);
+  showRecord();
+}
+
+function showTime() {
+  timeStart = timeStart + 1;
+  spanTime.innerHTML = timeStart;
+}
+
+// RESTART AND PAUSE HANDLERS:
 function restartGame() {
   level = 0;
   lives = 3;
-  timeStart = null;
-  playerPosition.x = null;
-  playerPosition.y = null;
-  update();
+  timeStart = 0;
+  clearInterval(timeInterval);
+  resetRocketPosition();
+  initialLoad();
 }
 
 function togglePause() {
@@ -287,8 +286,29 @@ function togglePause() {
     document.removeEventListener("keydown", checkCollisionWithAstronautAndRocks);
   } else {
     paused = false;
-    timeInterval = setInterval(showTime, 100);
+    timeInterval = setInterval(showTime, SECOND_IN_MILLISECONDS);
     document.addEventListener("keydown", checkCollisionWithAstronautAndRocks);
-    checkCollisionWithAstronautAndRocks();
   }
 }
+
+// UTILS:
+function round(value) {
+  return Number(value.toFixed(3));
+}
+
+// EVENT LISTENERS:
+
+// A.- Control buttons:
+restartButton.addEventListener("click", restartGame);
+pauseButton.addEventListener("click", togglePause);
+
+// B.- Initial load and resize:
+window.addEventListener("load", initialLoad);
+window.addEventListener("resize", setCanvasSize);
+
+// C.- Arrows buttons:
+window.addEventListener("keydown", moveByKeys);
+btnUp.addEventListener("click", moveUp);
+btnLeft.addEventListener("click", moveLeft);
+btnRight.addEventListener("click", moveRight);
+btnDown.addEventListener("click", moveDown);
