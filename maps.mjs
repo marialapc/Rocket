@@ -14,7 +14,7 @@ export const emojis = {
     'WIN': '🏆',
     'HEART':'❤️',
   };
-  
+
   const maps = [];
   maps.push(`
     IXXXXXXXXX
@@ -28,7 +28,7 @@ export const emojis = {
     -XXXXXXXXX
     OXXXXXXXXX
   `);
-  maps.push(`
+maps.push(`
     O--XXXXXXX
     X--XXXXXXX
     XX----XXXX
@@ -40,7 +40,7 @@ export const emojis = {
     XXXX---IXX
     XXXXXXXXXX
     `);
-  maps.push(`
+maps.push(`
     I-----XXXX
     XXXXX-XXXX
     XX----XXXX
@@ -80,4 +80,4 @@ export const emojis = {
   export {
     maps,
   };
-  
+

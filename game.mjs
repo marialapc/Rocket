@@ -1,4 +1,4 @@
-import {maps, emojis} from './maps.mjs';
+import { maps, emojis } from "./maps.mjs";
 const canvas = document.querySelector("#game");
 const game = canvas.getContext("2d");
 const btnUp = document.querySelector("#up");
@@ -60,7 +60,7 @@ function resetRocketPosition() {
   playerPosition.y = null;
 }
 
-function deleteRocket() { 
+function deleteRocket() {
   game.clearRect(0, 0, canvasSize, canvasSize);
 }
 
@@ -75,7 +75,7 @@ function prepareMap() {
   const mapRows = map.trim().split("\n");
   const mapRowCols = mapRows.map((row) => row.trim().split(""));
   return mapRowCols;
-  
+
 }
 
 function drawMap() {
@@ -193,7 +193,7 @@ function gameWin() {
   console.log(recordTime, playerTime);
 }
 
-// MOVE THE ROCKET BY BUTTONS: 
+// MOVE THE ROCKET BY BUTTONS:
 const moveByButtons = {
   ArrowUp: moveUp,
   ArrowLeft: moveLeft,
@@ -334,6 +334,3 @@ btnUp.addEventListener("click", moveUp);
 btnLeft.addEventListener("click", moveLeft);
 btnRight.addEventListener("click", moveRight);
 btnDown.addEventListener("click", moveDown);
-
-
-
