@@ -52,6 +52,29 @@ export const emojis = {
     XX-----OXX
     XXXXXXXXXX
   `);
+  maps.push(`
+    OXXXXXXXXX
+    ----XXXXXX
+    -XX-XXXXXX
+    -XX---X--I
+    -XXX----XX
+    -XXXX--XXX
+    --------XX
+    -XXXX-XXXX
+    -XXXXXXXXX
+    XXXXXXXXXX`
+  );
+  maps.push(`
+  XXXXX--XX-
+  ----XXX-XX
+  -XX-XX-X-X
+  ------X--O
+  -XXX----X-
+  X-XXX--XX-
+  --X-----X-
+  -XXXX-XXX-
+  I--X--XXX-
+  XX---X---X`);
 
   export {
     maps,

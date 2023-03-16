@@ -12,7 +12,6 @@ const pResult = document.querySelector("#result");
 const restartButton = document.querySelector("#restart-button");
 const pauseButton = document.querySelector("#pause-button");
 
-
 const milliseconds = 10;
 
 let canvasSize;
@@ -300,7 +299,6 @@ if (!paused) {
   clearInterval(timeInterval);
   document.removeEventListener("keydown", checkCollisionWithAstronautAndRocks);
   addPauseColors();
-
 
 } else {
   paused = false;
