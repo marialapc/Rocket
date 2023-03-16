@@ -58,13 +58,13 @@ body {
     border: 15px solid #02eea3;
     border-radius: 8px;
     background-image: url('./icons/background3.jpg');
-  width: 79%;
-  position: relative;
-  top: 7%;
+    width: 79%;
+    position: relative;
+    top: 7%;
   }
   
   .canvasPause{
-  border: 15px solid #6002ee;
+  border: 15px solid #6937ff;
   border-radius: 8px;
   background-image: url('./icons/background3.jpg');
   width: 79%;
@@ -238,10 +238,9 @@ body {
 .record{
   font-family: 'Press Start 2p', cursive;
 font-weight: 100;
-margin-left: 20px;
-margin-top: 20px;
 font-size: 12px;
-margin-bottom: 0px;
+margin:20px auto;
+width: calc(422px*0.85);
 }
 .time{
   font-family: 'Press Start 2p', cursive;
