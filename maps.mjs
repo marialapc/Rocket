@@ -3,7 +3,7 @@
  * El final de cada nivel debe ser el inicio del siguiente
 */
 
-const emojis = {
+export const emojis = {
     '-': ' ',
     'O': '🌎',
     'X': '🪨',
@@ -52,3 +52,8 @@ const emojis = {
     XX-----OXX
     XXXXXXXXXX
   `);
+
+  export {
+    maps,
+  };
+  
