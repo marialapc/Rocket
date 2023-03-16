@@ -293,7 +293,6 @@ function restartGame() {
   initialLoad();
   removePauseColors();
 }
-;
 
 function togglePause() {
 if (!paused) {
