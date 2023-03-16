@@ -271,6 +271,7 @@ function showTime() {
 
 // RESTART AND PAUSE HANDLERS:
 function restartGame() {
+  if(!paused){
   level = 0;
   lives = 3;
   timeStart = 0;
@@ -278,6 +279,7 @@ function restartGame() {
   resetRocketPosition();
   initialLoad();
 }
+};
 
 function togglePause() {
 if (!paused) {
@@ -287,6 +289,7 @@ if (!paused) {
   canvas.classList.add("canvasPause");
   pauseButton.classList.add('btnBPause');
   restartButton.classList.add('btnAPause');
+
 
 } else {
   paused = false;
