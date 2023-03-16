@@ -12,14 +12,14 @@ const pResult = document.querySelector("#result");
 const restartButton = document.querySelector("#restart-button");
 const pauseButton = document.querySelector("#pause-button");
 
-const SECOND_IN_MILLISECONDS = 1000;
+const milliseconds = 10;
 
 let canvasSize;
 let elementSize;
 let level = 0;
 let lives = 3;
 
-let timeStart;
+let timeStart = 0;
 let timeInterval;
 let paused = false;
 
@@ -260,7 +260,7 @@ function showRecord() {
 }
 
 function startTimer() {
-  timeInterval = setInterval(showTime, SECOND_IN_MILLISECONDS);
+  timeInterval = setInterval(showTime, milliseconds);
   showRecord();
 }
 
@@ -286,7 +286,7 @@ if (!paused) {
   document.removeEventListener("keydown", checkCollisionWithAstronautAndRocks);
 } else {
   paused = false;
-  timeInterval = setInterval(showTime, SECOND_IN_MILLISECONDS);
+  timeInterval = setInterval(showTime, milliseconds);
   document.addEventListener("keydown", checkCollisionWithAstronautAndRocks);
 }
 }
