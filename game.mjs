@@ -284,10 +284,17 @@ if (!paused) {
   paused = true;
   clearInterval(timeInterval);
   document.removeEventListener("keydown", checkCollisionWithAstronautAndRocks);
+  canvas.classList.add("canvasPause");
+  pauseButton.classList.add('btnBPause');
+  restartButton.classList.add('btnAPause');
+
 } else {
   paused = false;
   timeInterval = setInterval(showTime, milliseconds);
   document.addEventListener("keydown", checkCollisionWithAstronautAndRocks);
+  canvas.classList.remove("canvasPause");
+  pauseButton.classList.remove('btnBPause');
+  restartButton.classList.remove('btnAPause');
 }
 }
 
@@ -312,3 +319,6 @@ btnUp.addEventListener("click", moveUp);
 btnLeft.addEventListener("click", moveLeft);
 btnRight.addEventListener("click", moveRight);
 btnDown.addEventListener("click", moveDown);
+
+
+
