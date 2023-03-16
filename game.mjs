@@ -12,6 +12,7 @@ const pResult = document.querySelector("#result");
 const restartButton = document.querySelector("#restart-button");
 const pauseButton = document.querySelector("#pause-button");
 
+
 const milliseconds = 10;
 
 let canvasSize;
@@ -269,35 +270,44 @@ function showTime() {
   spanTime.innerHTML = timeStart;
 }
 
+function addPauseColors(){
+  canvas.classList.add("canvasPause");
+  pauseButton.classList.add('btnBPause');
+  restartButton.classList.add('btnAPause');
+}
+
+function removePauseColors(){
+  canvas.classList.remove("canvasPause");
+  pauseButton.classList.remove('btnBPause');
+  restartButton.classList.remove('btnAPause');
+}
+
 // RESTART AND PAUSE HANDLERS:
 function restartGame() {
-  if(!paused){
   level = 0;
   lives = 3;
   timeStart = 0;
+  paused = false;
   clearInterval(timeInterval);
   resetRocketPosition();
   initialLoad();
+  removePauseColors();
 }
-};
+;
 
 function togglePause() {
 if (!paused) {
   paused = true;
   clearInterval(timeInterval);
   document.removeEventListener("keydown", checkCollisionWithAstronautAndRocks);
-  canvas.classList.add("canvasPause");
-  pauseButton.classList.add('btnBPause');
-  restartButton.classList.add('btnAPause');
+  addPauseColors();
 
 
 } else {
   paused = false;
   timeInterval = setInterval(showTime, milliseconds);
   document.addEventListener("keydown", checkCollisionWithAstronautAndRocks);
-  canvas.classList.remove("canvasPause");
-  pauseButton.classList.remove('btnBPause');
-  restartButton.classList.remove('btnAPause');
+  removePauseColors();
 }
 }
 
