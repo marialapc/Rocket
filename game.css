@@ -90,6 +90,7 @@ body {
     font-family: inherit;
     margin: 0;
     padding: 6px 6px;
+    cursor: pointer;
     }
 
   .arrowUp{
@@ -131,6 +132,7 @@ body {
     width: 25px;
     height: 25px;
     border-radius: 100%;
+    cursor: pointer;
   }
   .btnB{
     background-color: #02eea3;
@@ -138,6 +140,7 @@ body {
     width: 25px;
     height: 25px;
     border-radius: 100%;
+    cursor: pointer;
   }
 
   .btnAPause{
