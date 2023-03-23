@@ -87,9 +87,9 @@ html {
     width: 350px;
     text-align: center;
     letter-spacing: 5px;
-    text-shadow: -1px 0 0 #fdff2a,
+    text-shadow: -0.5px 0 0 #fdff2a,
       -1px 0 0 #df4a42,
-      2px 0 0 #91fcfe,
+      0.5px 0 0 #91fcfe,
       1px 0 0 #4405fc;
     animation: blink 1s steps(4, start) infinite;
   }
