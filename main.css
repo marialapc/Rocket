@@ -94,6 +94,10 @@ html {
     animation: blink 1s steps(4, start) infinite;
   }
 
+  .rocket-link{
+    text-decoration: none;
+  }
+
   .button-start{
     width: 40px;
   height: 40px;  
@@ -102,6 +106,7 @@ html {
   background: none;
   border: none;
 }
+
 
 .button-start:hover{
 box-shadow: 1px 1px 1px 2px blue;
