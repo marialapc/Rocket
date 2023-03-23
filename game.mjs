@@ -46,7 +46,7 @@ function setCanvasSize() {
   canvasSize = Number(canvasSize.toFixed(0));
   canvas.setAttribute("width", canvasSize);
   canvas.setAttribute("height", canvasSize);
-  elementSize = canvasSize / 10;
+  elementSize = Math.min(canvasSize / 10, window.innerWidth / 10);
   playerPosition.x = null;
   playerPosition.y = null;
   setUIElements();
@@ -315,7 +315,7 @@ if (!paused) {
 
 // UTILS:
 function round(value) {
-  return Number(value.toFixed(3));
+  return Number(value.toFixed(2));
 }
 
 // EVENT LISTENERS:
