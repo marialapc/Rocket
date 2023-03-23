@@ -5,14 +5,14 @@
 
 export const emojis = {
     '-': ' ',
-    'O': '🌎',
+    'O':'🌍',
     'X': '🪨',
-    'I': '🧑‍🚀 ',
+    'I': '🧑‍🚀',
     'PLAYER': '🚀',
     'BOMB_COLLISION': '💥',
     'GAME_OVER': '👾',
     'WIN': '🏆',
-    'HEART':'❤️ ',
+    'HEART':'❤️',
   };
   
   const maps = [];
@@ -74,7 +74,8 @@ export const emojis = {
   --X-----X-
   -XXXX-XXX-
   I--X--XXX-
-  XX---X---X`);
+  XX---X---X
+  `);
 
   export {
     maps,

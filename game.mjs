@@ -29,6 +29,7 @@ let rocksPosition = [];
 
 // THE FIRST FUNCTION TO BE EXECUTED
 // WHEN THE PAGE IS LOADED:
+
 function initialLoad(){
   setCanvasSize();
   setUIElements();
@@ -48,6 +49,9 @@ function setCanvasSize() {
   elementSize = canvasSize / 10;
   playerPosition.x = null;
   playerPosition.y = null;
+  setUIElements();
+  drawMap();
+  drawRocket();
 }
 
 // ROCKET FUNCTIONS:
@@ -56,7 +60,7 @@ function resetRocketPosition() {
   playerPosition.y = null;
 }
 
-function deleteRocket() { // AAAAAAAAAAAAAA
+function deleteRocket() { 
   game.clearRect(0, 0, canvasSize, canvasSize);
 }
 
@@ -71,6 +75,7 @@ function prepareMap() {
   const mapRows = map.trim().split("\n");
   const mapRowCols = mapRows.map((row) => row.trim().split(""));
   return mapRowCols;
+  
 }
 
 function drawMap() {
