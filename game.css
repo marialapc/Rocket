@@ -3,13 +3,13 @@
 body {
   background-color: black;
     background-size:contain;
-    color: #fff;  
+    color: #fff;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
   }
-  
+
   .game-container {
     display: flex;
     align-items: center;
@@ -31,9 +31,9 @@ body {
     background: #EEE;
     border-radius: 10px 10px 60px 10px;
     box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
-  
+
   }
-  
+
   .gameboy:before {
     content: "";
     position: absolute;
@@ -41,7 +41,7 @@ body {
     height: 31px;
     border-bottom: 4px solid #c2c1c1;
   }
-  
+
   .gameboy:after {
     content: "";
     position: absolute;
@@ -53,7 +53,7 @@ body {
     margin-left: calc(40px * 0.85);
     margin-right: calc(40px * 0.85);
   }
-  
+
   canvas {
     border: 15px solid #02eea3;
     border-radius: 8px;
@@ -62,7 +62,7 @@ body {
     position: relative;
     top: 7%;
   }
-  
+
   .canvasPause{
   border: 15px solid #6937ff;
   border-radius: 8px;
@@ -82,7 +82,7 @@ body {
     margin-right: 180px;
    margin-top: 25px;
   }
-  
+
   button {
     background-color: #313131;
     border-radius: 8px;
@@ -101,7 +101,7 @@ body {
     height: 20px;
     width: 25px;
   }
-  
+
   .arrowRight{
     height: 20px;
     width: 25px;
@@ -111,7 +111,7 @@ body {
     height: 20px;
     width: 25px;
   }
-  
+
   .btn-AB {
     position: absolute;
     top: 410px;
@@ -167,7 +167,7 @@ body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight:900;
     color: rgb(27, 27, 27);
-    
+
   }
 
 
@@ -180,7 +180,7 @@ body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight:900;
     color: rgb(27, 27, 27);
-    
+
   }
 
  .speakers{
@@ -196,7 +196,7 @@ body {
   transform: rotate(-25deg);
   box-shadow: 15px 0 #c2c1c1, 30px 0 #c2c1c1, 45px 0 #c2c1c1, 60px 0 #c2c1c1;
  }
-  
+
 .fakeBtn{
   content: "";
   position: relative;
@@ -207,7 +207,7 @@ body {
   background: #434141;
   border-radius: 4px;
   transform: rotate(-110deg);
-  box-shadow: 15px 0 #c2c1c1, 30px 0 #c2c1c1, 
+  box-shadow: 15px 0 #c2c1c1, 30px 0 #c2c1c1,
 
 }
 .fakeBtn2{
@@ -220,7 +220,7 @@ body {
   background: #434141;
   border-radius: 4px;
   transform: rotate(-110deg);
-  box-shadow: 15px 0 #c2c1c1, 30px 0 #c2c1c1, 
+  box-shadow: 15px 0 #c2c1c1, 30px 0 #c2c1c1,
 
 }
 
@@ -281,7 +281,7 @@ width: calc(422px*0.85);
   height: 12px;
   width: 12px;
 }
-  
+
   @media (max-width: 2020px) {
     button { margin-right: 15px; margin-left: 15px; }
     #up, #down { margin-left: 100%; margin-right: 100%; }
