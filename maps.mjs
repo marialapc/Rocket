@@ -1,83 +1,86 @@
-/*
- * Reglas:
- * El final de cada nivel debe ser el inicio del siguiente
-*/
+ function createImage (src) {
+  const image = new Image(0, 0);
+  image.src = src;
+  return image;
+}
 
 export const emojis = {
     '-': ' ',
-    'O':'🌍',
-    'X': '🪨',
-    'I': '🧑‍🚀',
-    'PLAYER': '🚀',
+    'O': createImage('./icons/tierra.png'),
+    'X': createImage('./icons/roca.png'),
+    'W': createImage('./icons/roca2.png'),
+    'I': createImage('./icons/astronauta.png'),
+    'S': createImage('./icons/satellite.png'),
+    'PLAYER': createImage('./icons/cohete.png'),
     'BOMB_COLLISION': '💥',
     'GAME_OVER': '👾',
     'WIN': '🏆',
     'HEART':'❤️',
   };
-  
+
   const maps = [];
   maps.push(`
-    IXXXXXXXXX
+    IXXWXXXXXX
+    -XXXXXXXXX
+    -XXXXXXXWX
+    -XXXXWXXXX
     -XXXXXXXXX
     -XXXXXXXXX
-    -XXXXXXXXX
-    -XXXXXXXXX
-    -XXXXXXXXX
-    -XXXXXXXXX
-    -XXXXXXXXX
-    -XXXXXXXXX
-    OXXXXXXXXX
+    -XXXXWXXWX
+    -XXXXXXWXX
+    -XXWXXXXXX
+    OXXXXWXXXW
   `);
-  maps.push(`
-    O--XXXXXXX
-    X--XXXXXXX
-    XX----XXXX
+maps.push(`
+    O--XXXWWXX
+    X--XWXXWXX
+    XX----XXXW
     X--XX-XXXX
     X-XXX--XXX
-    X-XXXX-XXX
+    X-XWXX-XXX
     XX--XX--XX
-    XX--XXX-XX
-    XXXX---IXX
-    XXXXXXXXXX
+    XX--XWX-XX
+    XWXX---IXX
+    XXXWXXXXXX
     `);
-  maps.push(`
+maps.push(`
     I-----XXXX
-    XXXXX-XXXX
+    XXXWX-XXXX
     XX----XXXX
-    XX-XXXXXXX
+    XX-XXWXWWX
     XX-----XXX
-    XXXXXX-XXX
-    XX-----XXX
-    XX-XXXXXXX
+    XXXXXX-XWX
+    XX-----XWX
+    XX-XXWWXXX
     XX-----OXX
-    XXXXXXXXXX
+    XWWWXXXXXX
   `);
   maps.push(`
-    OXXXXXXXXX
-    ----XXXXXX
-    -XX-XXXXXX
+    OXXXXWWXXX
+    ----XXXXWX
+    -XX-XXWXXX
     -XX---X--I
     -XXX----XX
-    -XXXX--XXX
+    -XXXX--XSX
     --------XX
-    -XXXX-XXXX
-    -XXXXXXXXX
-    XXXXXXXXXX`
+    -XXXX-XXWX
+    -XXXXXWXXX
+    XXWXWXXXXX`
   );
   maps.push(`
-  XXXXX--XX-
-  ----XXX-XX
+  XXWXX--XX-
+  ----XWX-XW
   -XX-XX-X-X
   ------X--O
-  -XXX----X-
+  -XWX----X-
   X-XXX--XX-
   --X-----X-
-  -XXXX-XXX-
+  -XWWX-XWX-
   I--X--XXX-
-  XX---X---X
+  WX---X---X
   `);
 
   export {
     maps,
   };
-  
+
