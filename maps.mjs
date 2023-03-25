@@ -1,9 +1,4 @@
-/*
- * Reglas:
- * El final de cada nivel debe ser el inicio del siguiente
-*/
-
-function createImage (src) {
+ function createImage (src) {
   const image = new Image(0, 0);
   image.src = src;
   return image;
