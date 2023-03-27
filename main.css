@@ -593,7 +593,7 @@ body {
 }
 
 .title {
-  margin-top: 25px;
+  margin-top: 55px;
   color: white;
   font-family: "Press Start 2p", cursive;
   font-size: 45px;
@@ -664,20 +664,4 @@ body {
   to {
     transform: translateY(-2000px);
   }
-}
-
-@media (min-width: 1200px) {
-  .hero{
-    gap: 39px;
-  }
-  .title{
-    font-size: 50px;
-  }
-  .instructions {
-  margin-top: 5px;
-    font-size: 11px;
-    width: 350px;
-  }
-
-
 }
