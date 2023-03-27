@@ -22,61 +22,61 @@ export const emojis = {
   maps.push(`
     IXXWXXXXXX
     -XXXXXXXXX
-    -XXXXXXXXX
+    -XXXXXXWXX
     -XXXXXXXXX
     -XXXWXXXXX
     -XXXXXXXXX
-    -XXXXXXXXX
+    -WXXXXXXXX
     -XXXXXWXXX
     -XXXXXXXXX
-    OXXXXXXXXX
+    OXXWXXXXXX
   `);
   maps.push(`
-    O--XXXXXXX
+    O--XXWXXXX
     X--XXXXXXX
-    XX----XXSX
+    XX----XXWX
     X--WX-XXXX
     X-XXX--XWX
     X-XXXX-XXX
     XX--XX--XX
     XX--XXX-XX
     XXXX---IXX
-    XXXXXXXXXX
+    WXXXXXXXXX
     `);
   maps.push(`
     I-----XXXX
-    XXXXX-XXXX
+    XXXWX-XXXW
     XX----XXXX
-    XX-XXXXXXX
+    XX-XXXWXWX
     XX-----XXX
-    XXXXXX-XXX
-    XX-----XXX
+    XWXXXX-XXX
+    XX-----XWX
     XX-XXXXXXX
     XX-----OXX
-    XXXXXXXXXX
+    XXXXXXWXXX
   `);
   maps.push(`
-    OXXXXXXXXX
+    OXXXWXXXXX
     ----XXXXXX
     -XX-XXXXXX
-    -XX---X--I
-    -XXX----XX
+    -XX---W--I
+    -XWX----XX
     -XXXX--XXX
     --------XX
-    -XXXX-XXXX
+    -XXXX-XXSX
     -XXXXXXXXX
-    XXXXXXXXXX`
+    WXXWXXXXXX`
   );
   maps.push(`
-  XXXXX--XX-
+  WXXXX--XX-
   ----XXX-XX
-  -XX-XX-X-X
-  ------X--O
+  -XX-XX-W-X
+  ------W--O
   -XXX----X-
-  X-XXX--XX-
+  X-WXX--XX-
   --X-----X-
   -XXXX-XXX-
-  I--X--XXX-
+  I--X--XWX-
   XX---X---X
   `);
 
