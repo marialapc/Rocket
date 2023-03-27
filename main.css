@@ -634,7 +634,7 @@ body {
 
 .copy{
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
    color: white;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin-bottom: 45px;
@@ -665,6 +665,18 @@ body {
   }
 }
 
-@media (min-width: 1200px) 
-{
+@media (min-width: 1200px) {
+  .hero{
+    gap: 39px;
+  }
+  .title{
+    font-size: 50px;
+  }
+  .instructions {
+  margin-top: 5px;
+    font-size: 11px;
+    width: 350px;
+  }
+
+
 }
