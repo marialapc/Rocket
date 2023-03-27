@@ -91,7 +91,13 @@ body {
     margin: 0;
     padding: 6px 6px;
     cursor: pointer;
+    margin-right: 15px;
+    margin-left: 15px;
     }
+
+    #up, #down { 
+    margin-left: 100%; 
+    margin-right: 100%; }
 
   .arrowUp{
     height: 20px;
@@ -281,8 +287,26 @@ width: calc(422px*0.85);
   height: 12px;
   width: 12px;
 }
+
+.copy{
+  font-size: 13px;
+    width: 200px;
+    display: none;
+}
+
+.copy-link{
+  text-decoration: none;
+  margin-left: 4px;
+  color: white;
+}
+.copy-link:hover{
+  color: rgb(247, 69, 128)
+}
   
-  @media (max-width: 2020px) {
-    button { margin-right: 15px; margin-left: 15px; }
-    #up, #down { margin-left: 100%; margin-right: 100%; }
+  @media (min-width: 800px) {
+   .copy{
+    display: flex;
+    margin-left: 680px;
+  }
+  
   }
