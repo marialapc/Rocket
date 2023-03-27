@@ -1,4 +1,4 @@
-import {maps, emojis} from './maps.mjs';
+import { maps, emojis } from "./maps.mjs";
 const canvas = document.querySelector("#game");
 const game = canvas.getContext("2d");
 const btnUp = document.querySelector("#up");
@@ -11,6 +11,8 @@ const spanRecord = document.querySelector("#record");
 const pResult = document.querySelector("#result");
 const restartButton = document.querySelector("#restart-button");
 const pauseButton = document.querySelector("#pause-button");
+
+const elementSizeOffset = 3;
 
 const milliseconds = 10;
 
@@ -38,6 +40,7 @@ function initialLoad(){
 }
 
 function setCanvasSize() {
+  game.moveTo(-elementSize / 2, -elementSize / 2);
   if (window.innerHeight > window.innerWidth) {
     canvasSize = window.innerWidth * 0.7;
   } else {
@@ -46,7 +49,7 @@ function setCanvasSize() {
   canvasSize = Number(canvasSize.toFixed(0));
   canvas.setAttribute("width", canvasSize);
   canvas.setAttribute("height", canvasSize);
-  elementSize = Math.min(canvasSize / 10, window.innerWidth / 10);
+  elementSize = canvasSize / 10 - elementSizeOffset;
   playerPosition.x = null;
   playerPosition.y = null;
   setUIElements();
@@ -65,13 +68,14 @@ function deleteRocket() {
 }
 
 function drawRocket() {
-  game.fillText(emojis["PLAYER"], playerPosition.x, playerPosition.y);
+  game.drawImage(emojis["PLAYER"], playerPosition.x, playerPosition.y, elementSize, elementSize);
 }
 
 // MAP FUNCTIONS:
 function prepareMap() {
   // Prepare the map to be drawn:
   const map = maps[level];
+  if (!map) return;
   const mapRows = map.trim().split("\n");
   const mapRowCols = mapRows.map((row) => row.trim().split(""));
   return mapRowCols;
@@ -80,6 +84,7 @@ function prepareMap() {
 
 function drawMap() {
   const mapRowCols = prepareMap();
+  if (!mapRowCols) return;
   rocksPosition = [];
   mapRowCols.forEach((row, rowI) => {
     row.forEach((col, colI) => {
@@ -87,8 +92,8 @@ function drawMap() {
       // according to the size of the element
       // and the position of the element in the map (rowI and colI):
       const emoji = emojis[col];
-      const posX = elementSize * (colI + 1);
-      const posY = elementSize * (rowI + 1);
+      const posX = (elementSize * (colI + 1)) - (elementSize / 2);
+      const posY = (elementSize * (rowI + 1)) - (elementSize / 2);
       // Is a cell ocupped by the earth?
       if (col === "O") {
         // Set the position of the earth:
@@ -107,7 +112,8 @@ function drawMap() {
           rocksPosition.push({ x: posX, y: posY });
         }
         // Finally, we draw the element in the canvas:
-        game.fillText(emoji, posX, posY);
+        if (!emoji || emoji === ' ') return
+        game.drawImage(emoji, posX, posY, elementSize, elementSize);
       });
     });
   }
@@ -177,6 +183,7 @@ function levelFail() {
 
 function gameWin() {
   clearInterval(timeInterval);
+  paused = true;
   const recordTime = localStorage.getItem("record_time");
   const playerTime = timeStart;
   if (recordTime) {
@@ -190,7 +197,6 @@ function gameWin() {
     localStorage.setItem("record_time", playerTime);
     pResult.innerHTML = "Primera vez? Intenta superar tu tiempo";
   }
-  console.log(recordTime, playerTime);
 }
 
 // MOVE THE ROCKET BY BUTTONS: 
@@ -208,9 +214,8 @@ function moveByKeys(event) {
 
 function moveUp() {
   if (paused) return;
-  // move the rocket  and respect the canvas (step 11)
-  if ((playerPosition.y.toFixed(3) - elementSize) < elementSize) {
-    console.log("out");
+  // move the rocket  and respect the canvas
+  if ((round(playerPosition.y) - elementSize) < elementSize - elementSize) {
   } else {
     playerPosition.y -= elementSize;
     update();
@@ -219,8 +224,7 @@ function moveUp() {
 
 function moveLeft() {
   if (paused) return;
-  if (playerPosition.x.toFixed(3) - elementSize < elementSize) {
-    console.log("out");
+  if (round(playerPosition.x) - elementSize < elementSize - elementSize) {
   } else {
     playerPosition.x -= elementSize;
     update();
@@ -229,8 +233,7 @@ function moveLeft() {
 
 function moveRight() {
   if (paused) return;
-  if (playerPosition.x.toFixed(3) + elementSize > canvasSize) {
-    console.log("out");
+  if (round(playerPosition.x) + elementSize > canvasSize - elementSize) {
   } else {
     playerPosition.x += elementSize;
     update();
@@ -239,8 +242,7 @@ function moveRight() {
 
 function moveDown() {
   if (paused) return;
-  if (playerPosition.y.toFixed(3) + elementSize > canvasSize) {
-    console.log("out");
+  if (round(playerPosition.y) + elementSize > canvasSize - elementSize) {
   } else {
     playerPosition.y += elementSize;
     update();

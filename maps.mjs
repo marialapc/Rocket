@@ -1,14 +1,17 @@
-/*
- * Reglas:
- * El final de cada nivel debe ser el inicio del siguiente
-*/
+function createImage (src) {
+  const image = new Image(0, 0);
+  image.src = src;
+  return image;
+}
 
 export const emojis = {
-    '-': ' ',
-    'O':'🌍',
-    'X': '🪨',
-    'I': '🧑‍🚀',
-    'PLAYER': '🚀',
+ '-': ' ',
+    'O': createImage('./icons/tierra.png'),
+    'X': createImage('./icons/roca.png'),
+    'W': createImage('./icons/roca2.png'),
+    'I': createImage('./icons/astronauta.png'),
+    'S': createImage('./icons/satellite.png'),
+    'PLAYER': createImage('./icons/cohete.png'),
     'BOMB_COLLISION': '💥',
     'GAME_OVER': '👾',
     'WIN': '🏆',
@@ -17,23 +20,23 @@ export const emojis = {
   
   const maps = [];
   maps.push(`
-    IXXXXXXXXX
+    IXXWXXXXXX
     -XXXXXXXXX
     -XXXXXXXXX
     -XXXXXXXXX
+    -XXXWXXXXX
     -XXXXXXXXX
     -XXXXXXXXX
-    -XXXXXXXXX
-    -XXXXXXXXX
+    -XXXXXWXXX
     -XXXXXXXXX
     OXXXXXXXXX
   `);
   maps.push(`
     O--XXXXXXX
     X--XXXXXXX
-    XX----XXXX
-    X--XX-XXXX
-    X-XXX--XXX
+    XX----XXSX
+    X--WX-XXXX
+    X-XXX--XWX
     X-XXXX-XXX
     XX--XX--XX
     XX--XXX-XX
