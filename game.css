@@ -303,10 +303,10 @@ width: calc(422px*0.85);
   color: rgb(247, 69, 128)
 }
   
-  @media (min-width: 800px) {
+  @media (min-width: 1400px) {
    .copy{
     display: flex;
-    margin-left: 680px;
+    margin-left: 670px;
   }
   
   }
