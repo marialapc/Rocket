@@ -298,6 +298,7 @@ width: calc(422px*0.85);
   text-decoration: none;
   margin-left: 4px;
   color: white;
+
 }
 .copy-link:hover{
   color: rgb(247, 69, 128)

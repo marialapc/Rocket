@@ -16,6 +16,8 @@ html {
 html,
 body {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .stars {
@@ -581,7 +583,7 @@ body {
 }
 
 .hero {
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -590,6 +592,7 @@ body {
 }
 
 .title {
+  margin-top: 10px;
   color: white;
   font-family: "Press Start 2p", cursive;
   font-size: 45px;
@@ -629,6 +632,24 @@ body {
   box-shadow: 1px 1px 1px 2px red;
 }
 
+.copy{
+  text-align: center;
+  font-size: 13px;
+   color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-bottom: 45px;
+}
+
+.copy-link{
+  text-decoration: none;
+  margin-left: 2px;
+  color: white;
+
+}
+.copy-link:hover{
+  color: rgb(247, 69, 128)
+}
+
 @keyframes blink {
   to {
     visibility: hidden;
@@ -644,3 +665,6 @@ body {
   }
 }
 
+@media (min-width: 1200px) 
+{
+}
