@@ -26,7 +26,7 @@ export const emojis = {
     -XXXXXXXXX
     -XXXWXXXXX
     -XXXXXXXXX
-    -WXXXXXXXX
+    -XWXXXXXXX
     -XXXXXWXXX
     -XXXXXXXXX
     OXXWXXXXXX
@@ -35,9 +35,9 @@ export const emojis = {
     O--XXWXXXX
     X--XXXXXXX
     XX----XXWX
-    X--WX-XXXX
+    X--XX-XXXX
     X-XXX--XWX
-    X-XXXX-XXX
+    X-XWXX-XXX
     XX--XX--XX
     XX--XXX-XX
     XXXX---IXX
@@ -45,33 +45,33 @@ export const emojis = {
     `);
   maps.push(`
     I-----XXXX
-    XXXWX-XXXW
+    XXXXX-XXXW
     XX----XXXX
-    XX-XXXWXWX
+    XX-XXXXWXX
     XX-----XXX
-    XWXXXX-XXX
+    XXXXXX-XXX
     XX-----XWX
     XX-XXXXXXX
-    XX-----OXX
-    XXXXXXWXXX
+    WX-----OXX
+    XXXXXXXXXW
   `);
   maps.push(`
     OXXXWXXXXX
-    ----XXXXXX
+    ----XXXXWX
     -XX-XXXXXX
-    -XX---W--I
+    -XX---x--I
     -XWX----XX
     -XXXX--XXX
     --------XX
     -XXXX-XXSX
     -XXXXXXXXX
-    WXXWXXXXXX`
+    XXXWXXXXXX`
   );
   maps.push(`
   WXXXX--XX-
-  ----XXX-XX
-  -XX-XX-W-X
-  ------W--O
+  ----XXW-XX
+  -XX-XX-X-X
+  ------X--O
   -XXX----X-
   X-WXX--XX-
   --X-----X-
