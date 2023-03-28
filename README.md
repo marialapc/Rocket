@@ -1,6 +1,6 @@
 # 🚀 Rocket
 
-### Videojuego en línea desarrollado con **HTML**, **Canvas**, **CSS** y **JavaScript**.
+### Minijuego en línea desarrollado con **HTML**, **Canvas**, **CSS** y **JavaScript**.
 
 #### Rescata al astronauta en 7 niveles diferentes en el menor tiempo posible.
 
