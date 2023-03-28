@@ -96,8 +96,8 @@ export const emojis = {
   XWX-XX--XW
   --X-XXWX-X
   XSX------X
-  --XX--X-X-
-  X-XW-XXXI-
+  --WX--X-X-
+  X-XX-XXXI-
   -----X----
   -X-XX--XW-
   X--X--XWX-
