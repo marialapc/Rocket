@@ -4,7 +4,7 @@ Videojuego en línea creado con **HTML**, **Canvas**, **CSS** y **JavaScript**.
 
 Rescata al astronauta en 7 niveles diferentes en el menor tiempo posible.
 
-![Rocket-landing](icons\rocket-landing.jpg)
+![Rocket-landing](https://github.com/marialapc/rocket/main/icons\rocket-landing.jpg)
 ![Rocket-main](icons\rocket-main.jpg)
 
 ## 🕹️ Cómo jugar
