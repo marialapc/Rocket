@@ -19,13 +19,13 @@ El objetivo es llegar al astronauta en cada nivel en el menor tiempo posible y b
 - Botón Pause: pausa el juego.
 - Botón Restart: reanuda el juego.
 
-
 ## 💻 Tecnologías utilizadas
-- Lenguajes: 
-    - Lenguaje de marcado: **HTML5**.
-    - Lenguaje de estilos: **CSS avanzado con diseño responsive**.
-    - Lenguaje de programación: **Vanilla JS**.
+
+- Lenguajes:
+  - Lenguaje de marcado: **HTML5**.
+  - Lenguaje de estilos: **CSS avanzado con diseño responsive**.
+  - Lenguaje de programación: **Vanilla JS**.
 
 ## 👩🏽‍💻 Autora:
- María Lopez: [@marialapc](https://github.com/marialapc)
 
+María Lopez: [@marialapc](https://github.com/marialapc)
