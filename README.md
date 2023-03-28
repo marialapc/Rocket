@@ -4,6 +4,9 @@ Videojuego en línea creado con **HTML**, **Canvas**, **CSS** y **JavaScript**.
 
 Rescata al astronauta en 7 niveles diferentes en el menor tiempo posible.
 
+![Rocket-landing](icons\rocket-landing.jpg)
+![Rocket-main](icons\rocket-main.jpg)
+
 ## 🕹️ Cómo jugar
 
 Para empezar a jugar, simplemente haz clic en el botón de la página principal del juego. Una vez que comience el juego, controlarás un cohete que puede moverse hacia arriba, abajo, izquierda y derecha con las teclas de flecha de tu teclado o botones de la GameBoy.
